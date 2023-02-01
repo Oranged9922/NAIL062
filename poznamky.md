@@ -65,6 +65,7 @@ Nech $T$ a $T'$ sú teórie nad $\mathbb{P}$. Teória $T$ je (sémanticky):
 - extenziou $T'$, práve keď $M^\mathbb{P}(T)\subseteq M^\mathbb{p}(T')$,
 - ekvivalentná s $T'$, práve keď $M^\mathbb{P}(T)= M^\mathbb{p}(T')$,
 ### 6. Tablo z teórie, tablo dôkaz
+#### Intuícia
 - Tablo je súbor pravidiel pre hodnotenie logických výrokov. Tieto pravidlá sú popísané v tabuľkovej forme, ktorá umožňuje rýchlo a jednoducho hodnotiť výroky.
 - Tablo dôkaz obsahuje pravidlá pre prechod medzi jednotlivými krokmi dôkazu a umožňuje tak vyhodnotiť pravdivosť výroku.
 - Tablo strom je metóda pre zobrazovanie dôkazov v logike, kde sa dôkaz zobrazuje ako strom. Každý uzol stromu predstavuje jeden krok dôkazu a hlavná vetva stromu je cieľ dôkazu. Vetve na strome predstavujú jednotlivé kroky dôkazu
@@ -76,7 +77,26 @@ Nech $T$ a $T'$ sú teórie nad $\mathbb{P}$. Teória $T$ je (sémanticky):
                     /    \       /
                   p       q     p ∧ q
 
+#### Odpoveď na otázku
+- Tablo pre danú formulu $\varphi$ je binárny značkovaný strom reprezentujúci vyhľadávanie **protipríkladu** k $\varphi$, t.j. modelu teórie, v ktorom $\varphi$ neplatí,
+- Formula má dôkaz, ak každá vetva príslušného tabla *zlyhá*, t.j. nebol nájdený protipríklad, v tom prípade bude (systematické) tablo **konečné**,
+- ak protipríklad existuje, v (dokončenom) table bude vetva, ktorá ho poskytuje, táto vetva môže byť aj nekonečná.
+- Atomické tablo je konečné tablo
+- ak je $P$ položka na vetvi $V$  konečného tabla $\tau$ a $\tau'$ vznikne z $\tau$ pripojením atomického tabla pre $P$ na koniec vetvy $V$, je $\tau'$ takisto konečné tablo,
+- každé konečné tablo vznikne týmito dvomi spôsobmi.
+
+Definícia:
+- Tablo je postupnosť $\tau_0,\tau_1,...,\tau_n,...$ (konečné aj nekonečné) konečných tabiel takých, že $\tau_{n+1}$ vznikne z $\tau_n$ pomocou pravidla vyššie. formálne $\tau = \cup\tau_n$.
+
+Tablo dôkaz:
+- Nech $P$ je položka na vetvi $V$ tabla $\tau$. Povieme, že
+    - položka $P$ je **redukovaná** na $V$, ak sa na $V$ vyskytuje ako koreň atomického tabl, t.j. pri konštrukcii $\tau$ už došlo k k jeho rozvoji na $V$,
+    - vetva je **sporná**, ak obsahuje položky $T_\varphi$ a $F_\varphi$ pre nejakú formulu $\varphi$, inak je bezsporná. Vetva $V$ je **dokončená**, ak je sporná alebo je každá jej položka redukovaná na $V$,
+    - tablo $\tau$ je **dokončnené**, ak je každá jeho vetva dokončená a je **sporné**, ak každá jeho vetva je sporná.
+- Tablo dôkaz (dôkaz tablom) výrokovej formule $\varphi$ je *sporné tablo* s položkou $F_\varphi$ v koreni. $\varphi$ je **(tablo) dokázateľná**, píšeme |$-\varphi$, ak má tablo dôkaz.
+- Obdobne, **zamietnutie** formule $\varphi$ tablom je sporné tablo s položkou $T_\varphi$ v koreni. Formula $\varphi$ je **(tablo) zamietnuteľná**, ak má zamietnutie tablom, t. j. |$-\neg\varphi$.
 ### 7. Kanonický model
+#### Intuícia
 - Kanonický model v logike je štandardná interpretácia logického systému, ktorá sa používa k hodnoteniu pravdivostných logických výrokov.
 - Má niekoľko charakteristík:
     - Je to štandardná interpretácia, ktorá sa používa k hodnoteniu pravdivosti výrokov v danom logickom systéme,
@@ -84,18 +104,44 @@ Nech $T$ a $T'$ sú teórie nad $\mathbb{P}$. Teória $T$ je (sémanticky):
     - Kanonický model 
 - Napríklad pre výrok "p ∨ q" kanonickým modelom môže byť množina všetkých možných sústav elementárnych formulácií {p, q
 - Ďalším príkladom je výrok "p → q" kde kanonickým modelom môže byť množina všetkých možných sústav elementárnych formulácií {p, ¬p, q}
-
+#### Odpoveď na otázku
+- Z bezspornej vetve $V$ dokončeného tabla vyrobíme model, ktorý sa zhoduje s $V$. Vyjdeme z dostupných syntaktických objektov - konštantných termov.
+- Nech $V$ je bezsporná vetva dokončeného tabla z teórie $T$ jazyka $L = \langle\mathcal{F},\mathcal{R}\rangle$. Kanonický model z vetve $V$ je $L_C$-štruktúra $\mathcal{A} = \langle\mathcal{A},\mathcal{F}^A,\mathcal{R}^A\rangle$, kde
+    - $A$ je množina všetkých konštantných termov jazyka $L_C$,
+    - $f^A(s_1,...,s_n) = f(s_1,...,s_n)$ pre každý $n$-árny funkčný symbol $f \in \mathcal{F}\cup(L_C\backslash L)$ a $s_1,...,s_n \in A$,
+    - $R^A(s_1,...,s_n) \Leftrightarrow TR(s_1,...,s_n)$ je položka na $V$ pre každý $n$-árny relačný symbol $R \in \mathcal{R}$ či **rovnosť** a $s_1,...,s_n \in A$
 ### 8. Kongruencia štruktúry, faktorštruktúra, axiomy rovnosti.
+#### Intuícia
 - Kongruencie sú relácie medzi prvkami, ktoré sa chovajú ako "rovnosť", ale môžu existovať rozdiely medzi prvkami, ktoré sú kongruentné. 
 - Faktostruktura je špecifický druh štruktúry, v ktorej sú prvky rozdelené do skupín tak, aby prvky v rovnakej skupine boli ekvivalentné (tzn. že sa chovajú rovnako v rámci danej štruktúry). Tieto skupiny sa nazývajú faktory a celá štruktúra je faktorštruktúra. Napr. v teórii čísel môže byť definovaná ako relácia medzi číslami, ktorá rozdeľuje čísla na skupiny deliteľných čísel.
 - Axiomy rovnosti sú logické výroky, ktoré definujú rovnosť medzi prvkami v algebraickej štruktúre.
-
+#### Odpoveď na otázku
+- Nech $\sim$ je ekvivalencia na $A, f:A^n \rightarrow A$ a $R \subseteq A^n$, kde $n \in \mathbb{N}$. Potom je $\sim$
+    - **kongruenciou pre funkciu** $f$, ak pre každé $x_1,...,x_n,y_1,...,y_n\in A$ platí, že $x_1 \sim y_1 \wedge x_2 \sim y_2 \wedge \dots\wedge x_n \sim y_n \implies f(x_1,...,x_n) = f(y_1,...,y_n),$
+    - **kongruenciou pre reláciu** $R$, ak pre každé $x_1,...,x_n,y_1,...,y_n\in A$ platí, že $x_1 \sim y_1 \wedge x_2 \sim y_2 \wedge \dots\wedge x_n \sim y_n \implies (R(x_1,...,x_n) \Leftrightarrow R(y_1,...,y_n))$.
+- Nech ekvivalencia $\sim$ na $A$ je kongruencia pre každú funkciu a reáciu štruktúry $\mathcal{A}=\langle A, \mathcal{F}^A, \mathcal{R}^A\rangle$ pre jazyk $L = \langle \mathcal{F},\mathcal{R}\rangle$. **Faktorštruktúra (podielová štruktúra)** štruktúry $\mathcal{A}$ podľa $\sim$ je štruktúra $A/\sim = \langle A/\sim, \mathcal{F}^{A/\sim},\mathcal{R}^{A/\sim}\rangle$, kde
+    - $f^{A/\sim}([x_1]_\sim,...,[x_n]_\sim) = [f^A(x_1,...,x_n)]_\sim$
+    - $R^{A/\sim}([x_1]_\sim,...,[x_n]_\sim) \Leftrightarrow R^A(x_1,...,x_n)$
+- pre každé $f\in\mathcal{F},R\in\mathcal{R}$ a $x_1,...,x_n \in A$, t. j. funkcie a relácie sú definované pomocou reprezentantov.
+- Axiomy rovnosti pre jazyk $L$ s rovnosťou sú:
+    1. $x = x$
+    2. $x_1 = y_1 \wedge \dots \wedge x_n = y_n \rightarrow f(x_1,...,x_n) = f(y_1,...,y_n)$ pre každý $n$-árny funkčný symbol $f$ jazyka $L$
+    3. $x_1 = y_1 \wedge \dots \wedge x_n = y_n \rightarrow (R(x_1,...,x_n) \rightarrow R(y_1,...,y_n))$ pre každý $n$-árny relačný symbol $R$ jazyka $L$ vrátane =.
+     
 ### 9. CNF a DNF, Hornov tvar, Množinová reprezentácia CNF, splňujúce ohodnotenie.
+#### intuícia
 - CNF (Conjunctive Normal Form) je reprezentácia logického výrazu pomocou konjunkcií premenných a negácií premenných. DNF (Disjunctive Normal Form) je reprezentácia logického výrazu pomocou disjunkcií premenných a negácií premenných.
 - Hornov tvar je špeciálny druh CNF, kde sa v každom klauzuli nachádza maximálne jedna premenná s negáciou.
 - Množinová reprezentácia CNF znamená, že logický výraz sa reprezentuje ako množina klauzúl, kde každá klauzula je súbor premenných a negácií premenných.
 - Splňujúce ohodnotenie znamená, že danej logickému výrazu je priradená hodnota "pravda" (True).
-
+#### odpoveď na otázku
+##### CNF a DNF
+- **Literál** je prvýrok alebo jeho negácia. Ak je $p$ prvovýrok, označíme $p^0$ literál $\neg p$ a $p^1$ literál $p$. Ak je $l$ literál, označíme $\overline{l}$ literál *opačný* k $l$.
+- **Klauzula** je disjunkcia literálov, prázdnou klauzulou rozumieme $\perp$.
+- Výrok je v **Konjunktívne normálnom tvare (CNF)**, ak je konjunkciou klauzulí. Prázdnym výrokom v CNF rozumieme $\top$
+- **Elementárna konjunkcia** je konjunkcia literálov, prázdnou konjunkciou rozumieme $\top$.
+- Výrok je v **disjunktívne normálnom tvare (DNF)**, ak je disjunkciou elementárnych konjunkcií. Prázdnym výrokom v DNF rozumieme $\perp$.
+- 
 ### 10. Rezolúčne pravidlo, unifikácia, najvšeobecnejšia unifikácia
 - Rezolúčne pravidlo je metóda na dedukciu nových vyjadrení z existujúcich vyjadrení v predikátovej logike. Používa sa na vytváranie nových klauzúl z dvoch existujúcich klauzúl tak, že sa z nich odstráni literál, ktorý sa vyskytuje v oboch klauzulách s opačnými predikátmi.
     - Príklad: Dve klauzuly: (A v B) a (¬A v C)
@@ -109,6 +155,7 @@ Nech $T$ a $T'$ sú teórie nad $\mathbb{P}$. Teória $T$ je (sémanticky):
     - Riešenie: {x/b, y/a, z/b}
     - Toto je najvšeobecnejšie riešenie pre unifikáciu týchto dvoch termov, pretože obsahuje najväčší počet premien. 
 ### 11. Rezolúčny dôkaz a zamietnutie, rezolučný strom
+#### Intuícia
 - Rezolučný dôkaz je metóda automatického dôkazu v logike, ktorá sa používa na dôkaz konečnosti teórie. Princíp rezolúcie pozostáva z vytvárania nových viet z dvoch pôvodných viet tak, že sa z nich odstráni literál.
 - Zamietnutie je proces, ktorý sa používa na dôkaz neplatnosti tvrdenia. V rezolučnom dôkaze sa zamietnutie dosahuje tým, že sa vytvorí rezolúcia, ktorá obsahuje kontradikciu (napr. 0=1).
 - Rezolučný strom je grafické zobrazenie rezolučného dôkazu, ktorý zobrazuje ako sa postupne vytvárajú nové vety z pôvodných viet a ako sa konečne dosiahne kontradikcia.
@@ -137,8 +184,29 @@ Nech $T$ a $T'$ sú teórie nad $\mathbb{P}$. Teória $T$ je (sémanticky):
              \
               ~C
 Kde koreň stromu predstavuje pôvodnú vetu a listy stromu predstavujú nové vety, ktoré vznikli rezolúciou. Kontradikcia sa nachádza na konci stromu.
+#### Odpoveď na otázku
+Rezolučné pravidlo: Nech $C_1, C_2$ sú klauzule a $l \in C_1, \overline{l} \in C_2$ pre nejaký literál $l$. Potom $C_1$ a $C_2$ odvoď cez literál $l$ klauzulu $C$, zvanú **rezolventa**, kde
 
+$C = (C_1 \backslash \{l\})\cup(C_2\backslash\{\overline{l}\})$
+ 
+ Napr. z $\{p,q,r\} $ a $\{\neg p, \neg q\}$ je možné odvodiť $\{p,\neg q, r\}$ alebo $\{p,\neg p, r\}$
+ 
+Rezolučný dôkaz: 
+- odvodenie klauzule $C$ z formule $S$ je konečná postupnosť $C_0,...,C_n = C$ taká, že pre každé $i\leq n$ je $C_i \in S$ alebo je $C_i$ rezolventou nejakých dvoch predchádzajúcich klauzulí (aj rovnakých),
+- klauzula $C$ je (rezolúciou) *dokázateľná* z $S$, píšeme $S$|$-_rC$, ak má rezolučný dôkaz z $S$,
+- *zamietnutie* formule $S$ je rezolučný dôkaz $\square$ z $S$,
+- $S$ je (rezolúciou) *zamietnuteľná*, ak $S$|$-_R\square$.
+ 
+Rezolučný strom klauzule $C$ z formule $S$ je *konečný* binárny strom s vrcholmi označenými klauzulami taký, že
+- koreň je označený $C$,
+- listy sú označené klauzulami z $S$,
+- každý vnútorný vrchol je označený rezolventou z klauzulí v jeho synoch.
+
+Rezolučný uzáver $\mathcal{R}(S)$ formule $S$ je najmenšia induktívna množina definovaná 
+1. $C\in\mathcal{R}(S)$ pre každé $C \in S$
+2. ak sú $C_1, C_2 \in \mathcal{R}(S)$ a $C$ je rezolventa $C_1, C_2$, je zároveň $C\in \mathcal{R}(S)$.
 ### 12. Lineárna rezolúcia, lineárny dôkaz, LI-rezolúcia, LI-dôkaz
+#### Intuícia
 - varianty rezolúčneho dôkazu, kde sa používajú iba lineárne vety. Lineárnou vetou rozumieme takú vetu, ktorá obsahuje iba jeden negovaný literál. LI-rezolúcia a LI-dôkaz sú varianty lineárnej rezolúcie, kde sa používajú iba lineárne inferencie. Lineárnou inferenciou rozumieme taký dôkaz, ktorý vychádza iba z jednej premennej.
 - Príklad lineárnej rezolúcie:
     - P: A --> B
@@ -155,7 +223,31 @@ Kde koreň stromu predstavuje pôvodnú vetu a listy stromu predstavujú nové v
 	- Krok 2: B (z 2. P)
 	- Krok 3: Kontradikcia, pretože A a ~A sú v kroku 1.
 - Ako vidíme, v príklade lineárnej rezolúcie sa používa iba jedna premenná a v príklade LI-rezolúcie sa používa iba jedna premenná a jedna inferencia.
+#### Odpoveď na otázku
+Lineárny dôkaz klauzule $C$ z formule $S$ je konečná postupnosť dvojíc $C_0,B_0),...(C_n,B_n)$ taká, že $C_0\in S$ a pre každé $i\leq n$
+1. $B_i \in S$ alebo $B_i = C_j$ pre nejaké $j < i$, a 
+2. $C_{i+1}$ je rezolventa $C_i$ a $B_i$, kde $C_{n+1} = C$
+3. 
+$C_0$ nazývame *počiatočná* klauzula, $C_i$ je *centrálna* klauzula, $B_i$ je *bočná* klauzula.
+
+$C$ je *lineárne dokázateľná* z $S$, písané $S$|$-_LC$, ak má lineárny dôkaz z $S$
+
+*Lineárne zamietnutie* $S$ je lineárny dôkaz $\square$ z $S$
+
+$S$ je lineárne zamietnuteľná, ak $S$|$-_L\square$
+
+LI-rezolúcia
+ - Pre hornove formule môžeme lineárnu rezolúciu ďalej obmedziť:
+     - Hornova formule je množina Hornovych klauzulí
+     - Hornova klauzule je klauzula obsahujúca najviac jeden pozitívny literál.
+     - **Fakt** je (Hornova) klauzula $\{p\}$, kde $p$ je pozitívny literál.
+     - **Pravidlo** je (Hornova) klauzula s práve jedným pozitívnym a aspoň jedným negatívnym literálom. Pravidlá a fakty sú *programové klauzule*
+     - **Cieľ** je neprázdna (Hornova) klauzula bez pozitívneho literálu.
+     - Ak neobsahuje fakt (cieľ), je splniteľná nastavením všetkých premenných na 0 (resp. na 1).
+ - LI-rezolúcia z formule $S$ je lineárna rezolúcia z $S$, v ktorej je každá bočná klauzula $B_i$ z formule $S$.
+ 
 ### 13. Signatúra a jazyk predikátovej logiky, štruktúra daného jazyka
+#### Intuícia
 - signatúra je súbor pravidiel a symbolov, ktoré sa používajú v danom jazyku. Signatúra zahŕňa informácie o počte argumentov, ktoré môže predikát mať a o typoch týchto argumentov. Jazyk logiky je jazyk, v ktorom sa používa daná signatúra.
 - štruktúra jazyka zahŕňa:
     - predikáty (napr. "je pekný" alebo "je veľký"), ktoré popisujú vlastnosti objektov
@@ -164,8 +256,21 @@ Kde koreň stromu predstavuje pôvodnú vetu a listy stromu predstavujú nové v
     - kvantifikátory, ktoré určujú rozsah platnosti predikátu pre premenné
 - príkladom: "(existuje x) (pre každý y) (x je väčší ako y)" - týmto výrokom sa tvrdí, že existuje nejaký objekt x, ktorý je väčší než akýkoľvek iný objekt y.
 - ďalší príklad: "(pre každý x) (existuje y) (x a y sú priatelia)" - týmto výrokom sa tvrdí, že pre každý objekt x existuje nejaký objekt y, s ktorým je x priateľom.
-
+#### Odpoveď na otázku
+- Jazyk 1. radu obsahuje
+    - premenné $x,y,z,...,x_0,x_1,...$ (spočetne mnoho), množinu všetkých premenných značíme $Var$
+    - funkčné symboly $f,g,h,...$, vrátane konštantných symbolov $c,d,...$, čo sú nulárne funkčné symboly,
+    - relačné (predikátové) symboly $P,Q,R,...$, prípadne symbol $=$ (rovnosť) ako špeciálny relačný symbol
+    - kvantifikátory $(\forall x), (\exists x)$ pre každú premennú $x \in Var$,
+    - logické spojky $\neg,\wedge,\vee,\rightarrow,\leftrightarrow$,
+    - zátvorky $($ , $)$
+- Každý funkčný aj relačný symbol $S$ má danú *aritu* (četnosť) $ar(S) \in \mathbb{N}$
+- Signatúra jazyka
+    - Premenné, kvantifikátory, logické spojky a zátvorky sú logické symboly, zatiaľčo funkčné a relačné symboly sú *mimologické* symboly. Rovnosť (obvykle) uvažujeme zvlášť
+    - Signatúra je dvojica $\langle \mathcal{R}, \mathcal{F}\rangle$ disjunktných množín relačných a funkčných symbolov s danými aritami, pričom žiadny z nich nie je rovnosť. Signatúra teda určuje všetky mimologické symboly.
+    - Jazyk je daný signatúrou $L = \langle\mathcal{R},\mathcal{F}\rangle$ a uvedením, či sa jedná o jazyk s rovnosťou alebo bez. Jazyk musí obsahovať aspoň jeden relačný symbol.
 ### 14. Atomická formule, formule, sentence, otvorené formule
+#### Intuícia
 - atomická formule je najjednoduchšia forma výroku v jazyku predikátovej logiky, ktorá sa skladá iba z predikátu a premenných. Atomická formula sa nerozloží na ďalšie formuly.
 - formula je výraz v jazyku predikátovej logiky, ktorý môže byť skonštruovaný z atomických formúl pomocou logických spojek a kvantifikátorov.
 - sentence je formula, ktorá neobsahuje žiadne neznáme premenné
@@ -175,7 +280,25 @@ Kde koreň stromu predstavuje pôvodnú vetu a listy stromu predstavujú nové v
     - formula: "(existuje x) (x je veľký ako y)"
     - sentence: "Všetky slony sú veľké"
     - ovorená formula: "x je veľký ako y"
+#### Odpoveď na otázku
+Atomická formule jazyka $L$ je výraz $R(t_0,...,t_{n-1})$, kde $R$ je $n$-árny relačný symbol jazyka $L$ a $t_0,...,t_{n-1}$ sú termy jazyka $L$.
+Množinu všetkých atomických formulí jazyka $L$ značíme $AFm_L$
+Formule jazyka $L$ sú výrazy dané induktívnym predpisom
+1. každá atomická formula jazyka $L$ je formula,
+2. ak sú $\varphi, \psi$ formule, potom sú aj nasledujúce formule: $(\neg \varphi), (\varphi \wedge \psi), (\varphi \vee \psi), (\varphi \rightarrow \psi), (\varphi \leftrightarrow \psi)$. 
+3. ak je $\varphi$ formula a $x$ premenná, sú výrazy $((\forall x)\varphi),((\exists x)\varphi)$ formule,
+4. každá formula vznikne konečným užitím pravidiel 1-3.
+
+Množinu všetkých formulí jazyka $L$ značíme $Fm_L$
+
+Formulu, ktorá je súčasťou už inej formule, nazývame podformula formule $\varphi$.
+
+Otvorené a zatvorené formule:
+- Formula je otvorená, ak neobsahuje žiadny kvantifikátor. Pre množinu $OFm_L$ všetkých otvorených formulí jazyka $L$ platí $AFm_L \subsetneq OFm_L \subsetneq Fm_L$.
+- Formula je zatvorená, ak nemá žiadnu voľnú premennú, t. j. všetky výskyty premenných sú viazané.
+- Ak je formula otvorená a zatvorené zároveň, potom sú všetky jej termy konštantné (napr. $(1 + 0 = 0)$).
 ### 15. Instance formule, substitovateľnosť, variant formule
+#### Intuícia
 - Instance formuly je formula, ktorá vznikla vložením konkrétnych hodnôt do premenných v pôvodnej formuli.
 - Substitúcia je proces vkladania konkrétnych hodnôt do premenných vo formuli.
 - variant formuly je formula, ktorá sa líši od pôvodnej formuly iba zmenou pozície premenných alebo ich názvom.
@@ -184,8 +307,25 @@ Kde koreň stromu predstavuje pôvodnú vetu a listy stromu predstavujú nové v
     - Instance formuly: (existuje x)(x je väčší ako z)
     - Substitúcia: premenná y sa nahradila premennou z
     - Pôvodná formula: (existuje x)(x je väčší ako y)
-    - Variant formuly: (existuje y)(y je väčší ako x) 
+    - Variant formuly: (existuje y)(y je väčší ako x)
+#### Odpoveď na otázku
+Ak do formule za voľnú premennú $x$ dosadíme term $t$, požadujeme, aby vzniknutá formula hovorila o terme $t$ to isté, čo predtým hovorila o $x$, napr. $\varphi(x) \implies (\exists y)(x+y=1)$.
+
+Term $t$ je substituovateľný za premennú $x$ v o formuli $\varphi$, ak po jednotnom nahradení všetkých voľných výskytov $x$ za $t$ nevznikne vo $\varphi$ žiadny viazaný výskyt premennej z $t$.
+Potom vzniknutú formulu označíme $\varphi(x/t)$ a nazývame ju instanciou formule $\varphi$ vzniknutou substitúciou termu $t$ za premennú $x$ do $\varphi$.
+
+$t$ nie je substituovateľný za $x$ do $\varphi$, práve keď $x$ má voľný výskyt v nejakej podformuli $\varphi$ začínajúci $(\forall y)$ alebo $(\exists y)$ pre nejakú premennú $y$ z $t$.
+
+Konštantné termy sú vždy substituovateľné.
+
+Varianty
+- Nech $(Qx)\psi$ je podformula v $\varphi$, kde $Q$ značí $\forall$ či $\exists$ a $y$ je premenná, t.ž.
+    1. $y$ je substituovateľná za $x$ do $\psi$, a
+    2. $y$ nemá voľný výskyt v $\psi$.
+- nahradením podformule $(Qx)\psi$ za $(Qy)\psi(x/y)$ vznikne variant formule $\varphi$ v podformuli $(Qx)\psi$. Postupnou variáciou jednej či viac podformulí vo $\varphi$ vznikne variant formule $\psi$.
+- 
 ### 16. Pravdivostná hodnota formuly v štruktúre pri ohodnotení, platnosť formule v štruktúre 
+#### Intuícia
 - pravdivostná hodnota formuly v štruktúre sa určuje ohodnotením premenných v tejto štruktúre. Štruktúra predstavuje konkrétne objekty a ich vlastnosti, ktoré sa používajú na ohodnotenie formuly. Pravdivostná hodnota formuly môže byť pravda alebo nepravda.
 - Platnosť formuly v štruktúre znamená, že pre každé ohodnotenie premenných v tejto štruktúre, bude fomrula pravdivá.
 - Príklday:
@@ -198,6 +338,8 @@ Kde koreň stromu predstavuje pôvodnú vetu a listy stromu predstavujú nové v
     - Štruktúra: {x: slon, y: pes, z: mačka}
     - Pravdivostná hodnota formuly: pravda, pretože pre každý objekt x (slon, pes, mačka) platí, že x je slon.
     - Platnosť formuly: neplatí, pretože existuje aspoň jeden objekt (y: pes, z: mačka), ktorý nie je slon.
+#### Odpoveď na otázku
+Nech $\varphi$ je atomická formula tvaru $R(t_0,...,t_{n-1})$ jazyka $L=\langle\mathcal{R},\mathcal{F}\rangle$ a $\mathcal{A} = \langle A,\mathcal{R}^A,\mathcal{F}^A\rangle$ je štruktúra pre $L$.
 ### 17. Kompletná teória v predikátovej logike, elementárna ekvivalencia
 - Kompletná teória v predikátovej logike je množina všetkých výrokov, ktoré sú platné pre danú štruktúru. To znamená, že pre každú formulu, ktorá sa dá vyjadriť v danom jazyku, sa dá určiť, či je platná alebo neplatná pre danú štruktúru.
 - Elementárana ekvivalencia je vzťah medzi dvoma formulami, ktorý platí, keď pre každú štruktúru platí, že jedna formula je platná iba vtedy, keď je platná aj druhá.
