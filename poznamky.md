@@ -323,7 +323,7 @@ Varianty
     1. $y$ je substituovateľná za $x$ do $\psi$, a
     2. $y$ nemá voľný výskyt v $\psi$.
 - nahradením podformule $(Qx)\psi$ za $(Qy)\psi(x/y)$ vznikne variant formule $\varphi$ v podformuli $(Qx)\psi$. Postupnou variáciou jednej či viac podformulí vo $\varphi$ vznikne variant formule $\psi$.
-- 
+
 ### 16. Pravdivostná hodnota formuly v štruktúre pri ohodnotení, platnosť formule v štruktúre 
 #### Intuícia
 - pravdivostná hodnota formuly v štruktúre sa určuje ohodnotením premenných v tejto štruktúre. Štruktúra predstavuje konkrétne objekty a ich vlastnosti, ktoré sa používajú na ohodnotenie formuly. Pravdivostná hodnota formuly môže byť pravda alebo nepravda.
@@ -340,6 +340,12 @@ Varianty
     - Platnosť formuly: neplatí, pretože existuje aspoň jeden objekt (y: pes, z: mačka), ktorý nie je slon.
 #### Odpoveď na otázku
 Nech $\varphi$ je atomická formula tvaru $R(t_0,...,t_{n-1})$ jazyka $L=\langle\mathcal{R},\mathcal{F}\rangle$ a $\mathcal{A} = \langle A,\mathcal{R}^A,\mathcal{F}^A\rangle$ je štruktúra pre $L$.
+- Hodnota $H^\mathcal{A}_{at}(\varphi)[e]$ formule $\varphi$ v štruktúre $\mathcal{A}$ pri ohodnotení $e$ je
+    - 1, ak $(t_0^A[e],...t_{n-1}^A[e]) \in R^A$,
+    - 0 inak.
+- pričom $=^\mathcal{A}$ je $Id_A$, t. j. $H_{at}^\mathcal{A}(t_0=t_1)[e] = 1$ ak $t_0^\mathcal{A}[e] = t_1^\mathcal{A}[e]$, inak 0.
+- Ak je $\varphi$ sentencia t.j. všetky jej termy sú konštantné, jej hodnota v $\mathcal{A}$ nezávisí na ohodnotení $e$.
+- Hodnota $\varphi$ v $\mathcal{A}$ závisí iba na ohodnotení jej voľných premenných.
 ### 17. Kompletná teória v predikátovej logike, elementárna ekvivalencia
 - Kompletná teória v predikátovej logike je množina všetkých výrokov, ktoré sú platné pre danú štruktúru. To znamená, že pre každú formulu, ktorá sa dá vyjadriť v danom jazyku, sa dá určiť, či je platná alebo neplatná pre danú štruktúru.
 - Elementárana ekvivalencia je vzťah medzi dvoma formulami, ktorý platí, keď pre každú štruktúru platí, že jedna formula je platná iba vtedy, keď je platná aj druhá.
