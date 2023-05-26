@@ -141,7 +141,7 @@ Tablo dôkaz:
 - Výrok je v **Konjunktívne normálnom tvare (CNF)**, ak je konjunkciou klauzulí. Prázdnym výrokom v CNF rozumieme $\top$
 - **Elementárna konjunkcia** je konjunkcia literálov, prázdnou konjunkciou rozumieme $\top$.
 - Výrok je v **disjunktívne normálnom tvare (DNF)**, ak je disjunkciou elementárnych konjunkcií. Prázdnym výrokom v DNF rozumieme $\perp$.
-# TODO
+
 ### 10. Rezolúčne pravidlo, unifikácia, najvšeobecnejšia unifikácia
 #### intuícia
 - Rezolúčne pravidlo je metóda na dedukciu nových vyjadrení z existujúcich vyjadrení v predikátovej logike. Používa sa na vytváranie nových klauzúl z dvoch existujúcich klauzúl tak, že sa z nich odstráni literál, ktorý sa vyskytuje v oboch klauzulách s opačnými predikátmi.
@@ -155,8 +155,8 @@ Tablo dôkaz:
     - Príklad: Hľadáme MGU pre term F(x,a,b) a F(b,y,z)
     - Riešenie: {x/b, y/a, z/b}
     - Toto je najvšeobecnejšie riešenie pre unifikáciu týchto dvoch termov, pretože obsahuje najväčší počet premien.
-##### odpoveď na otázku
-# TODO
+#### odpoveď na otázku
+##### Doplniť
 ### 11. Rezolúčny dôkaz a zamietnutie, rezolučný strom
 #### Intuícia
 - Rezolučný dôkaz je metóda automatického dôkazu v logike, ktorá sa používa na dôkaz konečnosti teórie. Princíp rezolúcie pozostáva z vytvárania nových viet z dvoch pôvodných viet tak, že sa z nich odstráni literál.
@@ -248,7 +248,7 @@ LI-rezolúcia
      - **Cieľ** je neprázdna (Hornova) klauzula bez pozitívneho literálu.
      - Ak neobsahuje fakt (cieľ), je splniteľná nastavením všetkých premenných na 0 (resp. na 1).
  - LI-rezolúcia z formule $S$ je lineárna rezolúcia z $S$, v ktorej je každá bočná klauzula $B_i$ z formule $S$.
- # TODO
+
 ### 13. Signatúra a jazyk predikátovej logiky, štruktúra daného jazyka
 #### Intuícia
 - signatúra je súbor pravidiel a symbolov, ktoré sa používajú v danom jazyku. Signatúra zahŕňa informácie o počte argumentov, ktoré môže predikát mať a o typoch týchto argumentov. Jazyk logiky je jazyk, v ktorom sa používa daná signatúra.
