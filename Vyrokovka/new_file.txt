@@ -1,0 +1,66 @@
+ Obsah
+ TODO: doplnit obsah (reflinky)
+ (P1) Model ve výrokové logice, pravdivostní funkce výroku.
+ (P2) Sémantické pojmy (pravdivost, lživost, nezávislost, splnitelnost) v logice, vzhledem k teorii.
+ (P3) Ekvivalence výroků resp. výrokových teorií, T-ekvivalence.
+ (P4) Sémantické pojmy o teorii (sporná, bezesporná, kompletní, splnitelná).
+ (P5) Extenze teorie (jednoduchá, konzervativní), odpovídající sémantická kritéria.
+ (P6) Tablo z teorie, tablo důkaz.
+ (P7) Kanonický model.
+ (P8) Kongruence struktury, faktorstruktura, axiomy rovnosti.
+ (P9) CNF a DNF, Hornův tvar. Množinová reprezentace CNF formule, splňující ohodnocení.
+ (P10) Rezoluční pravidlo, unifikace, nejobecnější unifikace.
+ (P11) Rezoluční důkaz a zamítnutí, rezoluční strom.
+ (P12) Lineární rezoluce, lineární důkaz, LI-rezoluce, LI-důkaz.
+ (P13) Signatura a jazyk predikátové logiky, struktura daného jazyka.
+ (P14) Atomická formule, formule, sentence, otevřené formule.
+ (P15) Instance formule, substituovatelnost, varianta formule.
+ (P16) Pravdivostní hodnota formule ve struktuře při ohodnocení, platnost formule ve struktuře.
+ (P17) Kompletní teorie v predikátové logice, elementární ekvivalence.
+ (P18) Podstruktura, generovaná podstruktura, expanze a redukt struktury.
+ (P19) Definovatelnost ve struktuře.
+ (P20) Extenze o definice.
+ (P21) Prenexní normální forma, Skolemova varianta.
+ (P22) Izomorfismus struktur, izomorfní spektrum, $\omega$-kategorická teorie.
+ (P23) Axiomatizovatelnost, konečná axiomatizovatelnost, otevřená axiomatizovatelnost.
+ (P24) Rekurzivní axiomatizace, rekurzivní axiomatizovatelnost, rekurzivně spočetná kompletace.
+ (P25) Rozhodnutelná a částečnĕ rozhodnutelná teorie.
+ (L1) Množinu modelů nad konečným jazykem lze axiomatizovat výrokem v CNF, výrokem v DNF.
+ (L2) Algebra výroků bezesporné teorie nad konečným jazykem je izomorfní potenční algebře.
+ (L3) 2-SAT, Algoritmus implikačního grafu, jeho korektnost.
+ (L4) Horn-SAT, Algoritmus jednotkové propagace, jeho korektnost.
+ (L5) Algoritmus DPLL pro řešení SAT.
+ (L6) Věta o konstantách.
+ (L7) Vlastnosti extenze o definice.
+ (L8) Vztah definovatelných množin a automorfismů.
+ (L9) Tablo metoda v jazyce s rovností.
+ (L10) Věta o kompaktnosti a její aplikace.
+ (L11) Věta o korektnosti rezoluce ve výrokové logice.
+ (L12) Věta o korektnosti rezoluce v predikátové logice.
+ (L13) Souvislost stromu dosazení a splnitelnosti CNF formule.
+ (L14) Unifikační algoritmus (korektnost stačí vyslovit).
+ (L15) Nestandardní model pr̆irozených čísel.
+ (L16) Kompletní jednoduché extenze DeLO*.
+ (L17) Existence spočetného algebraicky uzavřeného tělesa.
+ (L18) Tělesa charakteristiky 0 nejsou konečně axiomatizovatelná.
+ (L19) Kritérium otevřené axiomatizovatelnosti.
+ (L20) Rekurzivně axiomatizovaná teorie je částečně rozhodnutelná, kompletní je rozhodnutelná.
+ (L21) Teorie konečné struktury v konečném jazyce s rovností je rozhodnutelná.
+ (L22) Gödelovy věty o neúplnosti a jejich důsledky (bez důkazı̊).
+ (T1) Věta o korektnosti tablo metody ve výrokové logice.
+ (T2) Věta o korektnosti tablo metody v predikátové logice.
+ (T3) Věta o úplnosti tablo metody ve výrokové logice.
+ (T4) Věta o úplnosti tablo metody v predikátové logice.
+ (T5) Věta o konečnosti sporu, důsledky o konečnosti a systematičnosti dükazů.
+ (T6) Věta o úplnosti rezoluce ve výrokové logice.
+ (T7) Vĕta o úplnosti LI-rezoluce pro výrokové Hornovy formule.
+ (T8) Věta o úplnosti rezoluce v predikátové logice (Lifting lemma stačí vyslovit)
+ (T9) Skolemova věta.
+ (T10) Herbrandova vĕta.
+ (T11) Löwenheim-Skolemova vĕta včetnĕ varianty s rovností, jejich důsledky.
+ (T12) Vztah izomorfismu a elementární ekvivalence.
+ (T13) w-kategorické kritérium kompletnosti.
+ (T14) Neaxiomatizovatelnost konečných modelů.
+ (T15) Věta o konečné axiomatizovatelnosti.
+ (T16) Rekurzivně axiomatizovaná teorie s rekurzivnĕ spočetnou kompletací je rozhodnutelná.
+ (T17) Nerozhodnutelnost predikátové logiky.

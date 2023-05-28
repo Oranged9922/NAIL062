@@ -1,0 +1,862 @@
+# Seznam otázek ke zkoušce z NAIL062
+### Obsah
+#### TODO: doplnit obsah (reflinky)
+## Seznam pojmů
+
+### (P1) Model ve výrokové logice, pravdivostní funkce výroku.
+Jazyk výrokové logiky je určený neprázdnou množinou výrokových proměnných $\mathbb{P}$ (také jim říkáme prvovýroky nebo atomické výroky). Tato množina může být konečná nebo i nekonečná, obvykle ale bude spočetná ${ }^1$ (pokud neřekneme jinak), a bude mít dané uspořádání. Pro výrokové proměnné budeme obvykle používat označení $p_i$ (od slova "proposition"), ale pro lepší čitelnost, zejména je-li $\mathbb{P}$ konečná, také $p, q, r, \ldots$ Například:
+$$
+\begin{aligned}
+& \mathbb{P}_1=\{p, q, r\} \\
+& \mathbb{P}_2=\left\{p_0, p_1, p_2, p_3, \ldots\right\}=\left\{p_i \mid i \in \mathbb{N}\right\}
+\end{aligned}
+$$
+Do jazyka patří kromě výrokových proměnných také logické symboly: symboly pro logické spojky $\neg, \wedge, \vee, \rightarrow, \leftrightarrow$ a závorky $($,$) . Budeme ale pro jednoduchost mluvit o "jazyce \mathbb{P}$ ".
+Definice 2.1.2 (Výrok). Výrok (výroková formule) v jazyce $\mathbb{P}$ je prvek množiny $\mathrm{VF}_{\mathbb{P}}$ definované následovně: $\mathrm{VF}_{\mathbb{P}}$ je nejmenší množina splňujícíi ${ }^3$
+- pro každý prvovýrok $p \in \mathbb{P}$ platí $p \in \mathrm{VF}_{\mathbb{P}}$,
+- pro každý výrok $\varphi \in \mathrm{VF}_{\mathbb{P}}$ je $(\neg \varphi)$ také prvek $\mathrm{VF}_{\mathbb{P}}$
+- pro každé $\varphi, \psi \in \operatorname{VF}_{\mathbb{P}}$ jsou $(\varphi \wedge \psi)$, $(\varphi \vee \psi),(\varphi \rightarrow \psi)$, a $(\varphi \leftrightarrow \psi)$ také prvky $\mathrm{VF}_{\mathbb{P}}$.
+Definice 2.1.6 (Teorie). Teorie v jazyce $\mathbb{P}$ je libovolná množina výroků v $\mathbb{P}$, tedy libovolná podmnožina $T \subseteq \mathrm{VF}_{\mathbb{P}}$. Jednotlivým výrokům $\varphi \in T$ říkáme také axiomy.
+
+Definice 2.2.2 (Pravdivostní funkce). Pravdivostní funkce výroku $\varphi$ v konečném jazyce $\mathbb{P}$ je funkce $f_{\varphi, \mathbb{P}}:\{0,1\}^{|\mathbb{P}|} \rightarrow\{0,1\}$ definovaná induktivně:
+- je-li $\varphi$-tý prvovýrok z $\mathbb{P}$, potom $f_{\varphi, \mathbb{P}}\left(x_0, \ldots, x_{n-1}\right)=x_i$,
+- je-li $\varphi=\left(\neg \varphi^{\prime}\right)$, potom
+$$
+f_{\varphi, \mathbb{P}}\left(x_0, \ldots, x_{n-1}\right)=f_{\neg}\left(f_{\varphi^{\prime}, \mathbb{P}}\left(x_0, \ldots, x_{n-1}\right)\right)
+$$
+- je-li $\left(\varphi^{\prime} \square \varphi^{\prime \prime}\right)$ kde $\square \in\{\wedge, \vee, \rightarrow, \leftrightarrow\}$, potom
+$$
+f_{\varphi, \mathbb{P}}\left(x_0, \ldots, x_{n-1}\right)=f_{\square}\left(f_{\varphi^{\prime}, \mathbb{P}}\left(x_0, \ldots, x_{n-1}\right), f_{\varphi^{\prime \prime}, \mathbb{P}}\left(x_0, \ldots, x_{n-1}\right)\right) .
+$$
+Definice 2.2.5 (Model jazyka). Model jazyka $\mathbb{P}$ je libovolné pravdivostní ohodnocení $v: \mathbb{P} \rightarrow$ $\{0,1\}$. Množinu (všech) modelů jazyka $\mathbb{P}$ označíme $\mathbf{M}_{\mathbb{P}}$ :
+$$
+\mathrm{M}_{\mathbb{P}}=\{v \mid v: \mathbb{P} \rightarrow\{0,1\}\}=\{0,1\}^{\mathbb{P}}
+$$
+Definice 2.2.7 (Platnost výroku v modelu, model výroku). Mějme výrok $\varphi$ v jazyce $\mathbb{P}$ a model $v \in \mathrm{M}_{\mathbb{P}}$. Pokud platí $f_{\varphi, \mathbb{P}}(v)=1$, potom říkáme, že výrok $\varphi$ platí $\mathrm{v}$ modelu $v, v$ je modelem $\varphi$, a píšeme $v \models \varphi$. Množinu všech modelů výroku $\varphi \operatorname{označujeme~} \operatorname{M}_{\mathbb{P}}(\varphi)$.
+
+Modelům jazyka, které nejsou modely $\varphi$, budeme někdy říkat nemodely $\varphi$. Tvoří doplněk množiny modelů $\varphi$. S pomocí zápisu pro inverzní relaci můžeme psát:
+$$
+\begin{array}{r}
+\mathrm{M}_{\mathbb{P}}(\varphi)=\left\{v \in \mathrm{M}_{\mathbb{P}} \mid v \models \varphi\right\}=f_{\varphi, \mathbb{P}}^{-1}[1] \\
+\overline{\mathrm{M}_{\mathbb{P}}(\varphi)}=M_{\mathbb{P}} \backslash M_{\mathbb{P}}(\varphi)=\left\{v \in \mathrm{M}_{\mathbb{P}} \mid v \not \models \varphi\right\}=f_{\varphi, \mathbb{P}}^{-1}[0]
+\end{array}
+$$
+Je-li jazyk zřejmý z kontextu, můžeme psát jen $\mathrm{M}(\varphi)$. Musíme si ale být opravdu jistí: například v jazyce $\mathbb{P}=\{p, q\}$ máme
+$$
+\mathrm{M}_{\{p, q\}}(p \rightarrow q)=\{(0,0),(0,1),(1,1)\}
+$$
+zatímco v jazyce $\mathbb{P}^{\prime}=\{p, q, r\}$ bychom měli
+$$
+\mathrm{M}_{\mathbb{P}^{\prime}}(p \rightarrow q)=\{(0,0,0),(0,0,1),(0,1,0),(0,1,1),(1,1,0),(1,1,1)\} .
+$$
+Definice 2.2.8 (Platnost teorie, model teorie). Je-li $T$ teorie $\mathrm{v}$ jazyce $\mathbb{P}$, potom $T$ platí $\mathrm{v}$ modelu $v$, pokud každý axiom $\varphi \in T$ platí ve $v$. V tom případě říkáme také, že $v$ je modelem $T$, a píšeme $v \models T$. Množinu všech modelů teorie $T$ v jazyce $\mathbb{P}$ označíme $\mathrm{M}_{\mathbb{P}}(T)$.
+
+Pracujeme-li s konečnou teorií, nebo přidáváme-li k nějaké teorii konečně mnoho nových axiomů, budeme používat následující zjednodušený zápis:
+- $\mathrm{M}_{\mathbb{P}}\left(\varphi_1, \varphi_2, \ldots, \varphi_n\right)$ místo $\mathrm{M}_{\mathbb{P}}\left(\left\{\varphi_1, \varphi_2, \ldots, \varphi_n\right\}\right)$,
+- $\mathrm{M}_{\mathbb{P}}(T, \varphi)$ místo $\mathrm{M}_{\mathbb{P}}(T \cup\{\varphi\})$.
+Všimněte si, že $\mathrm{M}_{\mathbb{P}}(T, \varphi)=\mathrm{M}_{\mathbb{P}}(T) \cap \mathrm{M}_{\mathbb{P}}(\varphi), \mathrm{M}_{\mathbb{P}}(T)=\bigcap_{\varphi \in T} \mathrm{M}_{\mathbb{P}}(\varphi)$, a že pro konečnou teorii (podobně i pro spočetnou) platí
+$$
+\mathrm{M}_{\mathbb{P}}\left(\varphi_1\right) \supseteq \mathrm{M}_{\mathbb{P}}\left(\varphi_1, \varphi_2\right) \supseteq \mathrm{M}_{\mathbb{P}}\left(\varphi_1, \varphi_2, \varphi_3\right) \supseteq \cdots \supseteq \mathrm{M}_{\mathbb{P}}\left(\varphi_1, \varphi_2, \ldots, \varphi_n\right) .
+$$
+Toho mi̊žeme využít při hledání modeli̊ hrubou silou.
+
+
+### (P2) Sémantické pojmy (pravdivost, lživost, nezávislost, splnitelnost) v logice, vzhledem k teorii.
+Definice 2.2.10 (Sémantické pojmy). Říkáme, že výrok $\varphi(v$ jazyce $\mathbb{P})$ je
+- pravdivý, tautologie, platí (v logice/logicky), a píšeme $\models \varphi$, pokud platí v každém modelu $($ jazyka $\mathbb{P}), \mathrm{M}_{\mathbb{P}}(\varphi)=\mathrm{M}_{\mathbb{P}}$
+- lživý, sporný, pokud nemá žádný $\operatorname{model,~} \mathrm{M}_{\mathbb{P}}(\varphi)=\emptyset .13$
+- nezávislý, pokud platí v nějakém modelu, a neplatí v nějakém jiném modelu, tj. není pravdivý ani lživý, $\emptyset \subsetneq \mathrm{M}_{\mathbb{P}}(\varphi) \subsetneq \mathrm{M}_{\mathbb{P}}$
+- splnitelný, pokud má nějaký model, tj. není lživý, $\mathrm{M}_{\mathbb{P}}(\varphi) \neq \emptyset$.
+Dále říkáme, že výroky $\varphi, \psi$ (ve stejném jazyce $\mathbb{P}$ ) jsou (logicky) ekvivalentní, píšeme $\varphi \sim \psi$ pokud mají stejné modely, tj.
+
+Definice 2.2.12 (Sémantické pojmy vzhledem k teorii). Mějme teorii $T$ v jazyce $\mathbb{P}$. Ríkáme, že výrok $\varphi$ v jazyce $\mathbb{P}$ je
+- pravdivý $v T$, důsledek $T$, platí $v T$, a píšeme $T \models \varphi$, pokud $\varphi$ platí v každém modelu teorie $T$, neboli $\mathrm{M}_{\mathbb{P}}(T) \subseteq \mathrm{M}_{\mathbb{P}}(\varphi)$,
+- lživý $v T$, sporný $v T$, pokud neplatí v žádném modelu $T$, neboli $\mathrm{M}_{\mathbb{P}}(\varphi) \cap \mathrm{M}_{\mathbb{P}}(T)=$ $\mathrm{M}_{\mathbb{P}}(T, \varphi)=\emptyset$
+- nezávislý $v T$, pokud platí v nějakém modelu $T$, a neplatí v nějakém jiném modelu $T$, tj. není pravdivý v $T$ ani lživý v $T, \emptyset \subsetneq \mathrm{M}_{\mathbb{P}}(T, \varphi) \subsetneq \mathrm{M}_{\mathbb{P}}(T)$,
+- splnitelný $v T$, konzistentní s $T$, pokud platí v nějakém modelu $T$, tj. není lživý v $T$, $\mathrm{M}_{\mathbb{P}}(T, \varphi) \neq \emptyset$.
+
+A říkáme, že výroky $\varphi, \psi$ (ve stejném jazyce $\mathbb{P}$ ) jsou ekvivalentni v $T, T$-ekvivalentní, píšeme $\varphi \sim_T \psi$ pokud platí v týchž modelech $T, \mathrm{tj}$.
+$\varphi \sim_T \psi$ právě když $\mathrm{M}_{\mathbb{P}}(T, \varphi)=\mathrm{M}_{\mathbb{P}}(T, \psi)$
+Je-li $T$ teorie v jazyce $L$ a $\varphi L$-formule, potom říkáme, že $\varphi$ je:
+- pravdivá (platí) $v T$, značíme $T \models \varphi$, pokud $\mathcal{A} \models \varphi$ pro všechna $\mathcal{A} \in \mathrm{M}(T)$ (neboli: $\mathrm{M}(T) \subseteq \mathrm{M}(\varphi))$
+- lživá $v T$, pokud $T \models \neg \varphi, \mathrm{tj}$. pokud je lživá v každém modelu $T$ (neboli: $\mathrm{M}(T) \cap \mathrm{M}(\varphi)=$ $\emptyset)$,
+- nezávislá v $T$, pokud není pravdivá $\mathrm{v} T$ ani lživá $\mathrm{v} T$.
+Máme-li prázdnou teorii $T=\emptyset\left(\mathrm{tj} . \mathrm{M}(T)=\mathrm{M}_L\right)$, potom teorii $T$ vynecháváme, píšeme $\models \varphi$, a říkáme, že $\varphi$ je pravdivá (v logice), (logicky) platí, je tautologie; podobně pro ostatní pojmy.
+Teorie je sporná, jestliže v ní platí spor $\perp$, který v predikátové logice můžeme definovat jako $R\left(x_1, \ldots, x_n\right) \wedge \neg R\left(x_1, \ldots, x_n\right)$, kde $R$ je libovolný (třeba první) relační symbol z jazyka nebo rovnost (nemá-li jazyk relační symbol, musí být s rovností). Teorie je sporná, právě když v ní platí každá formule, nebo, ekvivalentně, právě když nemá žádný model. Jinak říkáme, že je teorie bezesporná (neplatí-li v ní spor, ekvivalentně má-li alespoň jeden model).
+
+Sentencím pravdivým v $T$ ř́́káme důsledky $T$; množina všech důsledků $T$ v jazyce $L$ je:
+$$
+\operatorname{Csq}_L(T)=\{\varphi \mid \varphi \text { je sentence a } T \models \varphi\}
+$$
+
+### (P3) Ekvivalence výroků resp. výrokových teorií, T-ekvivalence.
+Dále říkáme, že výroky $\varphi, \psi$ (ve stejném jazyce $\mathbb{P}$ ) jsou (logicky) ekvivalentní, píšeme $\varphi \sim \psi$ pokud mají stejné modely, tj.
+
+A říkáme, že výroky $\varphi, \psi$ (ve stejném jazyce $\mathbb{P}$ ) jsou ekvivalentní v $T, T$-ekvivalentní, píšeme $\varphi \sim_T \psi$ pokud platí v týchž modelech $T$, tj.
+$\varphi \sim_T \psi$ právě když $\mathrm{M}_{\mathbb{P}}(T, \varphi)=\mathrm{M}_{\mathbb{P}}(T, \psi)$.
+
+### (P4) Sémantické pojmy o teorii (sporná, bezesporná, kompletní, splnitelná).
+Definice 2.4.2 (Vlastnosti teorií). Rekneme, že teorie $T$ v jazyce $\mathbb{P}$ je
+- sporná, jestliže v ní platí $\perp$ (spor), ekvivalentně, jestliže nemá žádný model, ekvivalentně, jestliže v ní platí všechny výroky,
+- bezesporná (splnitelná), pokud není sporná, tj. má nějaký model,
+- kompletní, jestliže není sporná a každý výrok je v ní pravdivý nebo lživý (tj. nemá žádné nezávislé výroky), ekvivalentně, pokud má právě jeden model.
+Je-li $T$ teorie v jazyce $L$ a $\varphi L$-formule, potom říkáme, že $\varphi$ je:
+- pravdivá (platí) $v T$, značíme $T \models \varphi$, pokud $\mathcal{A} \models \varphi$ pro všechna $\mathcal{A} \in \mathrm{M}(T)$ (neboli: $\mathrm{M}(T) \subseteq \mathrm{M}(\varphi))$
+- lživá $v T$, pokud $T \models \neg \varphi, \mathrm{t}$. pokud je lživá v každém modelu $T$ (neboli: $\mathrm{M}(T) \cap \mathrm{M}(\varphi)=$ $\emptyset)$,
+- nezávislá $v T$, pokud není pravdivá $\mathrm{v} T$ ani lživá $\mathrm{v} T$.
+Máme-li prázdnou teorii $T=\emptyset\left(\mathrm{tj} . \mathrm{M}(T)=\mathrm{M}_L\right)$, potom teorii $T$ vynecháváme, píšeme $\models \varphi$, a ř́́káme, že $\varphi$ je pravdivá (v logice), (logicky) platí, je tautologie; podobně pro ostatní pojmy.
+Teorie je sporná, jestliže v ní platí spor $\perp$, který v predikátové logice můžeme definovat jako $R\left(x_1, \ldots, x_n\right) \wedge \neg R\left(x_1, \ldots, x_n\right)$, kde $R$ je libovolný (třeba první) relační symbol z jazyka nebo rovnost (nemá-li jazyk relační symbol, musí být s rovností). Teorie je sporná, právě když v ní platí každá formule, nebo, ekvivalentně, právě když nemá žádný model. Jinak říkáme, že je teorie bezesporná (neplatí-li v ní spor, ekvivalentně má-li alespoň jeden model).
+
+Sentencím pravdivým v $T$ říkáme důsledky $T$; množina všech důsledků $T$ v jazyce $L$ je:
+$$
+\operatorname{Csq}_L(T)=\{\varphi \mid \varphi \text { je sentence a } T \models \varphi\}
+$$
+Kompletnost $\mathrm{v}$ predikátové logice
+Jak je tomu s pojmem kompletnosti teorie? ${ }^{22}$
+Definice 6.5.1. Teorie je kompletní, je-li bezesporná a každá sentence je v ní bud' pravdivá, nebo lživá.
+
+Nemůžeme ale říci, že je teorie kompletní, právě když má jediný model. Máme-li totiž jeden model, dostáváme z něj nekonečně mnoho jiných, ale izomorfních modelů, tj. lišících se jen pojmenováním prvků univerza. ${ }^{23}$ Uvažovat jediný model 'až na izomorfismus' by ale nebylo dostatečné. Správným pojmem je tzv. elementární ekvivalence:
+
+### (P5) Extenze teorie (jednoduchá, konzervativní), odpovídající sémantická kritéria.
+2.4.1 Důsledky teorií
+Připomeňme, že důsledek teorie $T$ je každý výrok, který v $T$ platí (tj. platí v každém modelu $T$ ) a označme si množinu všech důsledků teorie $T$ v jazyce $\mathbb{P}$ jako
+$$
+\operatorname{Csq}_{\mathbb{P}}(T)=\left\{\varphi \in \operatorname{VF}_{\mathbb{P}} \mid T \models \varphi\right\}
+$$
+Pokud je teorie $T$ v jazyce $\mathbb{P}$, můžeme psát:
+$$
+\operatorname{Csq}_{\mathbb{P}}(T)=\left\{\varphi \in \operatorname{VF}_{\mathbb{P}} \mid \mathrm{M}_{\mathbb{P}}(T) \subseteq \mathrm{M}_{\mathbb{P}}(\varphi)\right\}
+$$
+(Dává ale smysl mluvit i o důsledcích teorie v nějakém menším jazyce, který je podmnožinou jazyka $T$ ).
+Ukážeme si několik jednoduchých vlastností důsledků:
+Tvrzení 2.4.4. Mějme teorie $T, T^{\prime}$ a výroky $\varphi, \varphi_1, \ldots, \varphi_n$ v jazyce $\mathbb{P}$. Potom platí:
+(i) $T \subseteq \operatorname{Csq}_{\mathbb{P}}(T)$,
+(ii) $\operatorname{Csq}_{\mathbb{P}}(T)=\operatorname{Csq}_{\mathbb{P}}\left(\operatorname{Csq}_{\mathbb{P}}(T)\right)$,
+(iii) pokud $T \subseteq T^{\prime}$, potom $\mathrm{Csq}_{\mathbb{P}}(T) \subseteq \mathrm{Csq}_{\mathbb{P}}\left(T^{\prime}\right)$,
+(iv) $\varphi \in \operatorname{Csq\mathbb {P}}\left(\left\{\varphi_1, \ldots, \varphi_n\right\}\right)$ právě když je výrok $\left(\varphi_1 \wedge \cdots \wedge \varphi_n\right) \rightarrow \varphi$ tautologie. uvědomíme-li si následující vztahy:
+- $\mathrm{M}(\operatorname{Csq}(T))=\mathrm{M}(T)$
+- je-li $T \subseteq T^{\prime}$ potom $\mathrm{M}(T) \supseteq \mathrm{M}\left(T^{\prime}\right),{ }^{20}$
+- $\psi \rightarrow \varphi$ je tautologie, právě když platí $\mathrm{M}(\psi) \subseteq \mathrm{M}(\varphi)$,
+- $\mathrm{M}\left(\varphi_1 \wedge \cdots \wedge \varphi_n\right)=\mathrm{M}\left(\varphi_1, \ldots, \varphi_n\right)$.
+Definice 2.4.6 (Extenze teorie). Mějme teorii $T$ v jazyce $\mathbb{P}$.
+- je to jednoduchá extenze, pokud $\mathbb{P}^{\prime}=\mathbb{P}$,
+- je to konzervativní extenze, pokud $\operatorname{Csq}_{\mathbb{P}}(T)=\operatorname{Csq}_{\mathbb{P}}\left(T^{\prime}\right)=\operatorname{Csq}_{\mathbb{P}^{\prime}}\left(T^{\prime}\right) \cap \mathrm{VF}_{\mathbb{P}}$.
+Extenze tedy znamená, že splňuje všechny důsledky původní teorie. Extenze je jednoduchá, pokud do jazyka nepřidáváme žádné nové výrokové proměnné, a konzervativní, pokud neměníme platnost tvrzení vyjádřitelných v původním jazyce, každý nový důsledek tedy musí obsahovat nějakou nově přidanou výrokovou proměnnou.
+
+Co tyto pojmy znamenají sémanticky, v řeči modelủ? Zformulujme nejprve obecné pozorování, které ihned poté ilustrujeme na příkladě:
+
+Pozorování 2.4.7. Je-li $T$ teorie v jazyce $\mathbb{P}$ a $T^{\prime}$ teorie v jazyce $\mathbb{P}^{\prime}$ obsahujícím jazyk $P$. Potom platí:
+- $T^{\prime}$ je jednoduchou extenzí $T$, právě když $\mathbb{P}^{\prime}=\mathbb{P} a \mathrm{M}_{\mathbb{P}}\left(T^{\prime}\right) \subseteq \mathrm{M}_{\mathbb{P}}(T)$,
+- $T^{\prime}$ je extenzí $T$, právě když $\mathrm{M}_{\mathbb{P}^{\prime}}\left(T^{\prime}\right) \subseteq \mathrm{M}_{\mathbb{P}^{\prime}}(T)$. Uvažujeme tedy modely teorie $T$ nad rozšíŕeným jazykem $\mathbb{P}^{\prime} .21$ Jinými slovy, restrikce ${ }^{22}$ libovolného modelu $v \in \mathrm{M}_{\mathbb{P}^{\prime}}\left(T^{\prime}\right)$ na původní jazyk $\mathbb{P}$ musí být modelem $T$, mohli bychom psát $v]_{\mathbb{P}} \in \mathrm{M}_{\mathbb{P}}(T)$ nebo:
+$$
+\left\{v\left\lceil_{\mathbb{P}} \mid v \in \mathrm{M}_{\mathbb{P}^{\prime}}\left(T^{\prime}\right)\right\} \subseteq \mathrm{M}_{\mathbb{P}}(T)\right.
+$$
+- T' je konzervativní extenzí T, pokud je extenzí a navíc platí, že každý model $T$ (v jazyce $\mathbb{P})$ lze nějak expandovat (rozš́řrirt) ${ }^{23}$ na model $T^{\prime}$ (v jazyce $\left.\mathbb{P}^{\prime}\right)$, neboli každý model $T$ (v jazyce $\mathbb{P}$ ) získáme restrikcí nějakého modelu $T^{\prime}$ na jazyk $\mathbb{P}$. Mohli bychom psát:
+$$
+\left\{v \|_{\mathbb{P}} \mid v \in \mathrm{M}_{\mathbb{P}^{\prime}}\left(T^{\prime}\right)\right\}=\mathrm{M}_{\mathbb{P}}(T)
+$$
+- $T^{\prime}$ je extenzí $T$ a zároveñ $T$ je extenzí $T^{\prime}$, právě kdyż $\mathbb{P}^{\prime}=\mathbb{P}$ a $\mathrm{M}_{\mathbb{P}}\left(T^{\prime}\right)=\mathrm{M}_{\mathbb{P}}(T)$, neboli $T^{\prime} \sim T$.
+- Kompletní jednoduché extenze T jednoznačně až na ekvivalenci odpovídají modelům $T$. Sentencím pravdivým v $T$ říkáme důsledky $T$; množina všech důsledků $T$ v jazyce $L$ je:
+$$
+\operatorname{Csq}_L(T)=\{\varphi \mid \varphi \text { je sentence a } T \models \varphi\}
+$$
+Definice 6.7.1 (Extenze teorie). Mějme teorii $T$ v jazyce $L$.
+- Extenze teorie $T$ je libovolná teorie $T^{\prime} \mathrm{v}$ jazyce $L^{\prime} \supseteq L$ splňující $\operatorname{Csq}_L(T) \subseteq \mathrm{Csq}_{L^{\prime}}\left(T^{\prime}\right)$,
+- je to jednoduchá extenze, pokud $L^{\prime}=L$,
+- je to konzervativní extenze, pokud $\operatorname{Csq}_L(T)=\mathrm{Csq}_L\left(T^{\prime}\right)=\mathrm{Csq}_{L^{\prime}}\left(T^{\prime}\right) \cap \mathrm{Fm}_L$, $\operatorname{kde}^2 \mathrm{Fm}_L$ značí množinu všech formulí $\mathrm{v}$ jazyce $L$.
+- Teorie $T^{\prime}$ (v jazyce $\left.L\right)$ je ekvivalentní teorii $T$, pokud je $T^{\prime}$ extenzí $T$ a $T$ extenzí $T^{\prime}$.
+Podobně jako ve výrokové logice, pro teorie ve stejném jazyce platí následující sémantický popis těchto pojmů:
+Pozorování 6.7.2. Mějme teorie T, $T^{\prime}$ v jazyce L. Potom:
+- $T^{\prime}$ je extenze $T$, právě když $\mathrm{M}_L\left(T^{\prime}\right) \subseteq \mathrm{M}_L(T)$.
+- $T^{\prime}$ je ekvivalentnís $T$, právě když $\mathrm{M}_L\left(T^{\prime}\right)=\mathrm{M}_L(T)$.
+Jak je tomu v případě, kdy teorie $T^{\prime}$ je nad větším jazykem než $T$ ? Připomeňme situaci ve výrokové logice, popsanou v Pozorování 2.4.7. Zformulujeme a dokážeme analogické tvrzení: Zatímco ve výrokové logice jsme přidávali hodnoty pro nové prvovýroky, resp. je zapomínali, v predikátové logice budeme expandovat resp. redukovat struktury, tj. přidávat nebo zapomínat interpretace relačních, funkčních, a konstantních symbolů. Princip tvrzení ale zůstává stejný. Tvrzení 6.7.3. Mějme jazyky $L \subseteq L^{\prime}$, teorii $T$ v jazyce $L$, a teorii $T^{\prime}$ v jazyce $L^{\prime}$.
+(i) $T^{\prime}$ je extenzí teorie $T$, právě když redukt každého modelu $T^{\prime}$ na jazyk L je modelem $T$.
+(ii) Pokud je $T^{\prime}$ extenzí teorie T, a každý model $T$ lze expandovat do jazyka $L^{\prime}$ na nějaký model teorie $T^{\prime}$, potom je $T^{\prime}$ je konzervativní extenzi teorie $T$.
+
+Poznámka 6.7.4. V části (ii) platí i opačná implikace, důkaz ale není tak jednoduchý, jako ve výrokové logice, a proto ho neuvedeme. (Problémem je jak získat z modelu $T$ který nelze expandovat na model $T^{\prime} L$-sentenci, která platí $\mathrm{v} T$ ale ne $\mathrm{v} T^{\prime}$.)
+
+Důkaz. Nejprve dokažme (i): Mějme model $\mathcal{A}^{\prime}$ teorie $T^{\prime}$ a označme jako $\mathcal{A}$ jeho redukt na jazyk $L$. Protože $T^{\prime}$ je extenzí teorie $T$, platí v $T^{\prime}$, a tedy i v $\mathcal{A}^{\prime}$, každý axiom $\varphi \in T$. Potom ale i $\mathcal{A} \models \varphi(\varphi$ obsahuje jen symboly z jazyka $L)$, tedy $\mathcal{A}$ je modelem $T$.
+
+Na druhou stranu, mějme $L$-sentenci $\varphi$ takovou, že $T \models \varphi$. Chceme ukázat, že $T^{\prime} \models \varphi$ Pro libovolný model $\mathcal{A}^{\prime} \in \mathrm{M}_{L^{\prime}}\left(T^{\prime}\right)$ víme, že jeho $L$-redukt $\mathcal{A}$ je modelem $T$, tedy $\mathcal{A} \models \varphi$. Z toho plyne i $\mathcal{A}^{\prime} \models \varphi$ (opět proto, že $\varphi$ je v jazyce $L$ ).
+
+Nyní (ii): Vezměme libovolnou $L$-sentenci $\varphi$, která platí v teorii $T^{\prime}$, a ukažme, že platí i v $T$. Každý model $\mathcal{A}$ teorie $T$ lze expandovat na nějaký model $\mathcal{A}^{\prime}$ teorie $T^{\prime}$. Víme, že $\mathcal{A}^{\prime} \models \varphi$ takže i $\mathcal{A} \models \varphi$. Tím jsme dokázali, že $T \models \varphi$, tj. jde o konzervativní extenzi.
+
+### (P6) Tablo z teorie, tablo důkaz.
+7.2.2 Tablo důkaz
+Definice v této části jsou téměř identické odpovídajícím definicím z výrokové logiky. Hlavní technický problém je jak definovat redukovanost položek typu 'všichni' na větvi tabla: chceme aby za proměnnou byly substituovány všechny konstantní $L_C$-termy $t_i$.
+
+Definice 7.2.1 (Tablo). Konečné tablo $z$ teorie $T$ je uspořádaný, položkami označkovaný strom zkonstruovaný aplikací konečně mnoha následujících pravidel:
+- jednoprvkový strom označkovaný libovolnou položkou je tablo z teorie $T$,
+- pro libovolnou položkou $P$ na libovolné větvi $V$, můžeme na konec větve $V$ připojit atomické tablo pro položku $P$, přičemž je-li $P$ typu 'svědek', můžeme použít jen pomocný konstantní symbol $c_i \in C$, který se na větvi $V$ dosud nevyskytuje (pro položky typu 'všichni' můžeme použít libovolný konstantní $L_C$-term $t_i$ ),
+- na konec libovolné větve můžeme připojit položku T $\alpha$ pro libovolný axiom teorie $\alpha \in T$.
+Tablo z teorie $T$ je bud' konečné, nebo i nekonečné: v tom případě vzniklo ve spočetně mnoha krocích. Můžeme ho formálně vyjádřit jako sjednocení $\tau=\bigcup_{i \geq 0} \tau_i$, kde $\tau_i$ jsou konečná tabla z $T, \tau_0$ je jednoprvkové tablo, a $\tau_{i+1}$ vzniklo z $\tau_i$ v jednom kroku. ${ }^3$
+Tablo pro položku $P$ je tablo, které má položku $P$ v kořeni.
+Připomeňme konvenci, že pokud $P$ není typu 'všichni', potom kořen atomického tabla nebudeme zapisovat (nebot' vrchol s položkou $P$ už v tablu je).
+Definice 7.2.2 (Tablo důkaz). Tablo důkaz sentence $\varphi \mathrm{z}$ teorie $T$ je sporné tablo z teorie $T \mathrm{~s}$ položkou $F \varphi$ v kořeni. Pokud existuje, je $\varphi$ (tablo) dokazatelná z $T$, pís̃eme $T \vdash \varphi$. (Definujme také tablo zamítnutí jako sporné tablo s T $\varphi$ v kořeni. Pokud existuje, je $\varphi$ (tablo) zamítnutelná z $T$, tj. platí $T \vdash \neg \varphi$.)
+- Tablo je sporné, pokud je každá jeho větev sporná.
+- Větev je sporná, pokud obsahuje položky T $\psi$ a F $\psi$ pro nějakou sentenci $\psi$, jinak je bezesporná.
+- Tablo je dokončené, pokud je každá jeho větev dokončená.
+- Větev je dokončená, pokud
+- je sporná, nebo
+- je každá položka na této větvi redukovaná a zároveň větev obsahuje položku T $\alpha$ pro každý axiom $\alpha \in T$.
+- Položka $P$ je redukovaná na větvi $V$ procházející touto položkou, pokud
+- není typu 'všichni' a při konstrukci tabla již došlo k jejímu rozvoji na $V$, tj. vyskytuje se na $V$ jako kořen atomického tabla. ${ }^4$
+- je typu 'všichni' a všechny její výskyty na $V$ jsou na větvi $V$ redukované.
+- Výskyt položky $P$ typu 'všichni' na větvi $V$ je $i$-tý, pokud má na $V$ právě $i-1$ předků označených touto položkou, a $i$-tý výskyt je redukovaný na $V$, pokud
+- položka $P$ má $(i+1)$-ní výskyt na $V$, a zároveň
+- na $V$ se vyskytuje položka $\mathrm{T} \varphi\left(x / t_i\right)$ (je-li $P=\mathrm{T}(\forall x) \varphi(x)$ ) resp. F $\varphi\left(x / t_i\right)$ (je-li $P=\mathrm{F}(\exists x) \varphi(x))$, kde $t_i$ je $i$-tý konstantní $L_C$-term. ${ }^5$
+Všimněte si, že je-li položka typu 'všichni' na nějaké větvi redukovaná, musí mít na této větvi nekonečně mnoho výskytı̊, a museli jsme v nich použít při substituci všechny možnosti, tj. všechny konstantní $L_C$-termy.
+
+### (P7) Kanonický model.
+Definice 7.4.3 (Kanonický model). Mějme teorii $T \mathrm{v}$ jazyce $L=\langle\mathcal{F}, \mathcal{R}\rangle$ a necht $V$ je bezesporná větev nějakého dokončeného tabla z teorie $T$. Potom kanonický model pro $V$ je $L_C$-struktura $\mathcal{A}=\left\langle A, \mathcal{F}^{\mathcal{A}} \cup C^{\mathcal{A}}, \mathcal{R}^{\mathcal{A}}\right\rangle$ definovaná následovně:
+Je-li jazyk $L$ bez rovnosti, potom:
+- Doména $A$ je množina všech konstantních $L_C$-termů.
+- Pro každý n-ární relační symbol $R \in \mathcal{R}$ a "s $s_1, \ldots$, "s ${ }_n$ " z $A$ :
+$\left(" s_1 ", \ldots\right.$, " $\left.s_n "\right) \in R^{\mathcal{A}}$ právě když na větvi $V$ je položka $\mathrm{T} R\left(s_1, \ldots, s_n\right)$
+- Pro každý $n$-ární funkční symbol $f \in \mathcal{F}$ a "s $s_1,, \ldots$, "s $n_n$ z $A$ :
+$$
+f^{\mathcal{A}}\left(" s_1 ", \ldots, " s_n "\right)=" f\left(s_1, \ldots, s_n\right) "
+$$
+Speciálně, pro konstantní symbol $c$ máme $c^{\mathcal{A}}=$ "c".
+Funkci $f^{\mathcal{A}}$ tedy interpretujeme jako 'vytvoření' nového termu ze symbolu $f$ a vstupních termů
+Necht je $L$ jazyk s rovností. Připomeňme, že naše tablo je nyní z teorie $T^*$, tj. z rozšíření $T$ o axiomy rovnosti pro $L$. Nejprve vytvoříme kanonický model $\mathcal{B}$ pro $V$ jakoby byl $L$ bez rovnosti (jeho doména $B$ je tedy množina všech konstantních $L_C$-termů). Dále definujeme relaci $=^B$ stejně jako pro ostatní relační symboly:
+$$
+\text { " } s_1 "={ }^B \text { "s } s_2 " \text { právě když na větvi } V \text { je položka } \mathrm{T} s_1=s_2
+$$
+Kanonický model pro $V$ potom definujeme jako faktorstrukturu $\mathcal{A}=\mathcal{B} /=^B$.
+Jak plyne z diskuze v Sekci 7.3 , relace $={ }^B$ je opravdu kongruence struktury $\mathcal{B}$, definice je tedy korektní, a relace $=^{\mathcal{A}}$ je identita na $A$. Platí následující jednoduché pozorování:
+
+Pozorování 7.4.4. Pro každou formuli $\varphi$ máme $\mathcal{B} \models \varphi$ (kde symbol $=$ je interpretován jako binární relace $\left.=^B\right)$, právě když $\mathcal{A}=\mathcal{B} /=^B \models \varphi(k d e=$ je interpretován jako identita).
+
+### (P8) Kongruence struktury, faktorstruktura, axiomy rovnosti.
+Definice 7.3.1 (Kongruence). Mějme ekvivalenci $\sim$ na množině $A$, funkci $f: A^n \rightarrow A$, a relaci $R \subseteq A^n$. ̌̌íkáme, že $\sim$ je
+- kongruencí pro funkci $f$, pokud pro všechna $x_i, y_i \in A$ taková, že $x_i \sim y_i(1 \leq i \leq n)$ platí $f\left(x_1, \ldots, x_n\right) \sim f\left(y_1, \ldots, y_n\right)$
+- kongruencí pro relaci $R$, pokud pro všechna $x_i, y_i \in A$ taková, že $x_i \sim y_i(1 \leq i \leq n)$ platí $R\left(x_1, \ldots, x_n\right)$ právě když $R\left(y_1, \ldots, y_n\right)$.
+
+Kongruence struktury $\mathcal{A}$ je ekvivalence $\sim$ na množině $A$, která je kongruencí pro všechny funkce a relace $\mathcal{A}$.
+
+Definice 7.3.2 (Faktorstruktura). Mějme strukturu $\mathcal{A}$ a její kongruenci . Faktorstruktura (podílová struktura) $\mathcal{A}$ podle $\sim$ je struktura $\mathcal{A} / \sim$ v témž jazyce, jejíž univerzum $A / \sim$ je množina všech rozkladových tříd $A$ podle $\sim$, a jejíž funkce a relace jsou definované pomocí reprezentantů, $\mathrm{tj}:$
+- $f^{\mathcal{A} / \sim}\left(\left[x_1\right]_{\sim}, \ldots,\left[x_n\right]_{\sim}\right)=\left[f^{\mathcal{A}}\left(x_1, \ldots, x_n\right)\right]_{\sim}$, pro každý (n-ární) funkční symbol $f$, a
+- $R^{\mathcal{A} / \sim}\left(\left[x_1\right]_{\sim}, \ldots,\left[x_n\right]_{\sim}\right)$ právě když $R^{\mathcal{A}}\left(x_1, \ldots, x_n\right)$, pro každý (n-ární) relační symbol $R$.
+Definice 7.3.3 (Axiomy rovnosti). Axiomy rovnosti pro jazyk $L$ s rovností jsou následující:
+(i) $x=x$
+(ii) $x_1=y_1 \wedge \cdots \wedge x_n=y_n \rightarrow f\left(x_1, \ldots, x_n\right)=f\left(y_1, \ldots, y_n\right)$ pro každý $n$-ární funkční symbol $f$ jazyka $L$
+(iii) $x_1=y_1 \wedge \cdots \wedge x_n=y_n \rightarrow\left(R\left(x_1, \ldots, x_n\right) \rightarrow R\left(y_1, \ldots, y_n\right)\right)$ pro každý $n$-ární relační symbol $R$ jazyka $L$ včetně rovnosti.
+
+### (P9) CNF a DNF, Hornův tvar. Množinová reprezentace CNF formule, splňující ohodnocení.
+Připomeňme, že výroky jsou ekvivalentní, pokud mají stejnou množinu modelů. Pro každý výrok existuje nekonečně mnoho ekvivalentních výroků; často se hodí vyjádřit výrok v nějakém 'hezkém' (užitečném) 'tvaru', tj. najít ekvivalentní výrok v daném tvaru. Takovému konceptu tvaru se v matematice říká normální forma. My si představíme dvě nejznámější: konjunktivní normální formu (conjunctive normal form, CNF) a disjunktivní normální formu (DNF).
+Používá se následující terminologie a značení:
+- Literál $\ell$ je bud' prvovýrok $p$ nebo negace prvovýroku $\neg p$. Pro prvovýrok $p$ označme $p^0=\neg p$ a $p^1=p$. Je-li $\ell$ literál, potom $\bar{\ell}$ označuje opačný literál $\mathrm{k} \ell$. Je-li $\ell=p$ (pozitivní literál), potom $\bar{\ell}=\neg p$, je-li $\ell=\neg p$ (negativní literál), potom $\bar{\ell}=p$
+- Klauzule (clause) je disjunkce literálů $C=\ell_1 \vee \ell_2 \vee \cdots \vee \ell_n$. Jednotková klauzule (unit clause) je samotný literál $(n=1)$ a prázdnou klauzulí $(n=0)$ myslíme $\perp$.
+- Výrok je v konjunktivní normální formě (v CNF) pokud je konjunkcí klauzulí. Prázdný výrok v CNF je $\top$.
+- Elementární konjunkce je konjunkce literálů $E=\ell_1 \wedge \ell_2 \wedge \cdots \wedge \ell_n$. Jednotková elementární konjunkce je samotný literál $(n=1)$. Prázdná elementární konjunkce $(n=0)$ je $\top$.
+- Výrok je $v$ disjunktivní normální formě (v DNF) pokud je disjunkcí elementárních konjunkcí. Prázdný výrok v DNF je $\perp$.
+Nyní si ukážeme další fragment SATu řešitelný v polynomiálním čase, tzv. Horn-SAT neboli problém splnitelnosti hornovských výroků. Výrok je v hornovský (v Hornově tvaru) ${ }^6$, pokud je konjunkcí hornovských klauzulí, tj. klauzulí obsahujících nejvýše jeden *pozitivni* literál. Význam Hornovských klauzulí vyplývá z ekvivalentního vyjádření ve formě implikace:
+$$
+\neg p_1 \vee \neg p_2 \vee \cdots \vee \neg p_n \vee q \sim\left(p_1 \wedge p_2 \wedge \cdots \wedge p_n\right) \rightarrow q
+$$
+Hornovské formule tedy dobře modelují systémy, kde splnění určitých podmínek zaručuje splnění jiné podmínky. Upozorněme, že jednotková klauzule $\ell$ je také hornovská. V kontextu logického programování se jí ř́́ká fakt, pokud je literál pozitivní, a cúl pokud je negativní. ${ }^7$ Hornovské formule s alespoň jedním pozitivním a alespoň jedním negativním literálem jsou pravidla.
+5.1 Množinová reprezentace
+Nejprve představíme úsporněǰ̌í zápis CNF výroků, tzv. množinový zápis. Bylo by totiž nepraktické zapisovat výroky včetně závorek a logických symbolı.
+- Připomeňme, že Literál $\ell$ je prvovýrok nebo negace prvovýroku a že $\bar{\ell}$ označuje opačný literál $\mathrm{k} \ell$.
+- Klauzule $C$ je konečná množina literálů. Prázdnou klauzuli, která není nikdy splněna, ${ }^1$ označíme $\square$.
+${ }^1$ Reprezentuje disjunkci prázdné množiny literálů, žádný z disjunktů tedy není splněný.
+- $(C N F)$ formule $S$ je (konečná, nebo i nekonečná) množina klauzulí. Prázdná formule $\emptyset$ je vždy splněna. ${ }^2$
+
+Poznámka 5.1.1. Všimněte si, že formule může být i nekonečná množina klauzulí. Pokud tedy převádíme nekonečnou výrokovou teorii do CNF, zapíšeme v množinové reprezentaci všech nekonečně mnoho klauzulí jako prvky jediné formule (množiny). V praktických aplikacích je samozřejmě formule (téměř vždy) konečná.
+
+V množinové reprezentaci odpovídají modely množinám literálů, které obsahují pro každou výrokovou proměnnou $p$ právě jeden z literálo̊ $p, \neg p$ :
+- (Částečné) ohodnocení $\mathcal{V}$ je libovolná množina literálů, která je konzistentní, tj. neobsahuje dvojici opačných literálů.
+- Ohodnocení je úplné, pokud obsahuje pozitivní nebo negativní literál pro každou výrokovou proměnnou.
+- Ohodnocení $\mathcal{V}$ splňuje formuli $S$, píšeme $\mathcal{V} \models S$, pokud $\mathcal{V}$ obsahuje nějaký literál z každé klauzule v $S$, tj.:
+$$
+\mathcal{V} \cap C \neq \emptyset \text { pro každou } C \in S
+$$
+
+### (P10) Rezoluční pravidlo, unifikace, nejobecnější unifikace.
+Definice 5.2.1 (Rezoluční pravidlo). Mějme klauzule $C_1$ a $C_2$ a literál $\ell$ takový, že $\ell \in C_1$ a $\bar{\ell} \in C_2$. Potom rezolventa klauzulí $C_1$ a $C_2$ přes literál $\ell$ je klauzule
+$$
+C=\left(C_1 \backslash\{\ell\}\right) \cup\left(C_2 \backslash\{\bar{\ell}\}\right)
+$$
+Z první klauzule tedy odstraníme literál $\ell$ a z druhé literál $\bar{\ell}$ (které tam musely být!) a všechny zbylé literály sjednotíme do výsledné rezolventy. S pomocí symbolu ப் pro disjunktní sjednocení bychom také mohli psát:
+$$
+C_1^{\prime} \cup C_2^{\prime} \text { je rezolventou klauzulí } C_1^{\prime} \dot{ப}\{\ell\} \text { a } C_2^{\prime} \dot{ப}\{\bar{\ell}\}
+$$
+Definice 8.5.2 (Rezoluční pravidlo). Mějme klauzule $C_1$ a $C_2$ s disjunktními množinami proměnných a necht' jsou tvaru
+$$
+C_1=C_1^{\prime} \sqcup\left\{A_1, \ldots, A_n\right\}, \quad C_2=C_2^{\prime} \sqcup\left\{\neg B_1, \ldots, \neg B_m\right\}
+$$
+kde $n, m \geq 1$ a množinu výrazů $S=\left\{A_1, \ldots, A_n, B_1, \ldots, B_m\right\}$ lze unifikovat. ${ }^{10}$ Bud' $\sigma$ nejobecnější unifikace $S .^{11}$ Rezolventa klauzulí $C_1$ a $C_2$ je následující klauzule:
+$$
+C=C_1^{\prime} \sigma \cup C_2^{\prime} \sigma
+$$
+Poznámka 8.5.3. Podmínku o disjunktních množinách proměnných můžeme vždy splnit, pokud přejmenujeme proměnné v jedné z klauzulí. Proč je to potřeba? Například, z klauzulí $\{\{P(x)\},\{\neg P(f(x))\}\}$ můžeme získat prázdnou klauzuli $\square$, pokud nahradíme klauzuli $\{P(x)\}$ klauzulí $\{\{P(y)\}$. Množina výrazů $\{P(x), \neg P(f(x))\}$ ale není unifikovatelná, bez přejmenování proměnných by to tedy nešlo.
+Definice 8.4.2 (Substituce). Substituce je konečná množina $\sigma=\left\{x_1 / t_1, \ldots, x_n / t_n\right\}$, kde $x_i$ jouu navzájem různé proměnné a $t_i$ jsou termy, přičemž vyžadujeme, aby term $t_i$ nebyl roven proměnné $x_i$. Substituce $\sigma$ je
+- základní, jsou-li všechny termy $t_i$ konstantní,
+- přejmenováni proměnných, jsou-li všechny termy $t_i$ navzájem různé proměnné.
+Instance výrazu (termu nebo literálu) $E$ při substituci $\sigma=\left\{x_1 / t_1, \ldots, x_n / t_n\right\}$ je výraz vzniklý z $E$ simultánním nahrazením všech výskytů proměnných $x_i$ termy $t_i$, označme jej $E \sigma$. Je-li $S$ množina výrazů, potom značíme $S \sigma=\{E \sigma \mid E \in S\}$.
+
+Protože proměnné nahrazujeme simultánně pro všechny proměnné zároveň, případný výskyt proměnné $x_i \mathrm{v}$ termu $t_j$ nepovede ke zřetězení substitucí.
+
+Definice 8.4.8 (Unifikace). Mějme konečnou množinu výrazů $S=\left\{E_1, \ldots, E_n\right\}$. Substituce $\sigma$ je unifikace pro $S$, pokud $E_1 \sigma=E_2 \sigma=\cdots=E_n \sigma$, neboli $S \sigma$ obsahuje jediný výraz. Pokud existuje, potom říkáme také, že $S$ je unifikovatelná.
+
+Unifikace pro $S$ je nejobecnějš́́, pokud pro každou unifikaci $\tau$ pro $S$ existuje substituce $\lambda$ taková, že $\tau=\sigma \lambda$. Všimněte si, že nejobecnějších unifikací pro $S$ může být více, ale liší se jen přejmenováním proměnných.
+
+### (P11) Rezoluční důkaz a zamítnutí, rezoluční strom.
+Definice 5.2.4 (Rezoluční důkaz). Rezoluční důkaz (odvození) klauzule $C$ z formule $S$ je konečná posloupnost klauzulí $C_0, C_1, \ldots, C_n=C$ taková, že pro každé $i$ bud' $C_i \in S$ nebo $C_i$ je rezolventou nějakých $C_j, C_k$ kde $j<i$ a $k<i$.
+
+Pokud rezoluční důkaz existuje, říkáme, že $C$ je rezolucí dokazatelná z $S$, a píšeme $S \vdash_R C$. (Rezoluční) zamítnutí formule $S$ je rezoluční důkaz $\square$ z $S$, v tom případě je $S$ (rezolucí) zamítnutelná.
+
+Definice 5.2.6 (Rezoluční strom). Rezoluční strom klauzule $C$ z formule $S$ je konečný binární strom s vrcholy označenými klauzulemi, kde
+- v kor̆eni je $C$,
+- v listech jsou klauzule z $S$,
+- v každém vnitřním vrcholu je rezolventa klauzulí ze synů tohoto vrcholu.
+Definice 8.5.4 (Rezoluční důkaz). Rezoluční důkaz (odvození) klauzule $C$ z formule $S$ je konečná posloupnost klauzulí $C_0, C_1, \ldots, C_n=C$ taková, že pro každé $i$ je
+- bud' $C_i=C_i^{\prime} \sigma$ pro nějakou klauzuli $C_i \in S$ a přejmenování proměnných $\sigma$, nebo
+- $C_i$ je rezolventou nějakých $C_j, C_k$ kde $j<i$ a $k<i$.
+Pokud rezoluční důkaz existuje, říkáme, že $C$ je rezolucí dokazatelná z $S$, a píšeme $S \vdash_R C$. (Rezoluční) zamítnutí formule $S$ je rezoluční důkaz $\square$ z $S$, v tom případě je $S$ (rezolucí) zamítnutelná.
+
+### (P12) Lineární rezoluce, lineární důkaz, LI-rezoluce, LI-důkaz.
+Definice 5.4.1 (Lineární důkaz). Lineární důkaz (rezolucí) klauzule $C$ z formule $S$ je konečná posloupnost
+$$
+\left[\begin{array}{l}
+C_0 \\
+B_0
+\end{array}\right],\left[\begin{array}{l}
+C_1 \\
+B_1
+\end{array}\right], \ldots,\left[\begin{array}{l}
+C_n \\
+B_n
+\end{array}\right], C_{n+1}
+$$
+kde $C_i$ říkáme centrální klauzule, $C_0$ je počáteční, $C_{n+1}=C$ je koncová, $B_i$ jsou boční klauzule, a platí:
+- $C_0 \in S$, pro $i \leq n$ je $C_{i+1}$ rezolventou $C_i$ a $B_i$,
+- $B_0 \in S$, pro $i \leq n$ je $B_i \in S$ nebo $B_i=C_j$ pro nějaké $j<i$.
+Lineární zamítnutí $S$ je lineární důkaz $\square$ z $S$. Lineární důkaz můžeme znázornit takto:
+5.4.2 LI-rezoluce
+V obecném lineárním důkazu může být každá následující boční klauzule bud' axiom z $S$ nebo jedna z předchozích centrálních klauzulí. Pokud zakážeme druhou možnost, budeme-li tedy požadovat, aby všechny boční klauzule byly z $S$, dostaneme tzv. LI (linear-input) rezoluci:
+Definice 5.4.4 (LI-důkaz). LI-důkaz (rezolucí) klauzule $C$ z formule $S$ je lineární důkaz
+$$
+\left[\begin{array}{l}
+C_0 \\
+B_0
+\end{array}\right],\left[\begin{array}{l}
+C_1 \\
+B_1
+\end{array}\right], \ldots,\left[\begin{array}{l}
+C_n \\
+B_n
+\end{array}\right], C
+$$
+ve kterém je každá boční klauzule $B_i$ axiom z $S$. Pokud LI-důkaz existuje, říkáme, že je $C$ LI-dokazatelná z $S$, a píšeme $S \vdash_{L I} C$. Pokud $S \vdash_{L I} \square$, je $S$ LI-zamítnutelná.
+
+Poznámka 5.4.5. LI-důkaz přímo dává rezoluční strom (všechny listy jsou axiomy), a to ve speciálním tvaru, kterému bychom mohli říkat 'chlupatá cesta'. A naopak, z rezolučního stromu ve tvaru chlupaté cesty okamžitě získáme LI-důkaz: vrcholy na cestě jsou centrální klauzule, chlupy jsou boční klauzule.
+
+Zatímco lineární rezoluce je jen jiný pohled na obecný rezoluční důkaz, LI-rezoluce přináší zásadní omezení: ztrácíme úplnost (ne každá nesplnitelná formule má LI-zamítnutí). Na druhou stranu, LI-důkazy je jednodušší konstruovat. ${ }^5$
+
+V této sekci připomeneme pojmy lineárniho a linear-input důkazu, LI-rezoluci a její úplnost pro Hornovské formule. Definice i znění vět jsou stejné jako ve výrokové logice, důkaz lze provést převedením na výrokovou logiku opět pomocí Herbrandovy věty a Lifting lemmatu.
+Definice 8.7.1 (Lineární a LI důkaz). Lineární důkaz (rezolucí) klauzule $C$ z formule $S$ je konečná posloupnost
+$$
+\left[\begin{array}{l}
+C_0 \\
+B_0
+\end{array}\right],\left[\begin{array}{l}
+C_1 \\
+B_1
+\end{array}\right], \ldots,\left[\begin{array}{l}
+C_n \\
+B_n
+\end{array}\right], C_{n+1}
+$$
+kde $C_i$ ř́́káme centrální klauzule, $C_0$ je počáteční, $C_{n+1}=C$ je koncová, $B_i$ jsou boční klauzule, a platí:
+- $C_0$ je varianta klauzule z $S$, pro $i \leq n$ je $C_{i+1}$ rezolventou $C_i$ a $B_i$,
+- $B_0$ je varianta klauzule z $S$, pro $i \leq n$ je $B_i$ varianta klauzule z $S$ nebo $B_i=C_j$ pro nějaké $j<i$.
+Lineární zamítnutí $S$ je lineární důkaz $\square$ z $S$.
+LI-důkaz je lineární důkaz, ve kterém je každá boční klauzule $B_i$ variantou klauzule z $S$. Pokud existuje LI-důkaz, říkáme, že je $C$ LI-dokazatelná z $S$, a píšeme $S \vdash_{L I} C$. Pokud $S \vdash_{L I} \square$, je $S$ LI-zamítnutelná.
+
+V Poznámce 5.4.2 jsme poznamenali, že 'lineární' rezoluce (založená na lineárních důkazech) je úplná. Důkaz byl ponechán jako cvičení. Stejné tvrzení platí i v predikátové rezoluci:
+Věta 8.7.2 (O úplnosti lineární rezoluce). Klauzule $C$ má lineární důkaz z CNF formule $S$, právě když má rezoluční důkaz z $S\left(t j . S \vdash_R C\right)$.
+
+Důkaz. Z lineárního důkazu snadno vyrobíme rezoluční strom. Opačná implikace plyne z Poznámky 5.4.2 a z Lifting lemmatu (jehož použití zachovává linearitu rezolučního důkazu).
+
+### (P13) Signatura a jazyk predikátové logiky, struktura daného jazyka.
+Definice 6.2.1. Signatura je dvojice $\langle\mathcal{R}, \mathcal{F}\rangle$, kde $\mathcal{R}, \mathcal{F}$ jsou disjunktní množiny symbolů (relační a funkční, ty zahrnují konstantní) spolu s danými aritami (tj. danými funkcí ar: $\mathcal{R} \cup$ $\mathcal{F} \rightarrow \mathbb{N}$ ) a neobsahující symbol '=' (ten je rezervovaný pro rovnost).
+
+Často ale budeme signaturu zapisovat jen výčtem symbolo̊, bude-li jejich arita a to, zda jsou relační nebo funkční, zřejmé z kontextu. Uved'me několik příkladů signatur:
+- $\langle E\rangle$ signatura grafĩ: $E$ je binární relační symbol (struktury jsou uspořádané grafy),
+- $\langle\leq\rangle$ signatura částečných uspořádání: stejná jako signatura grafů, jen jiný symbol, ${ }^6$
+- $\langle+,-, 0\rangle$ signatura grup: + je binární funkční, - unární funkční, 0 konstantní symbol
+- $\langle+,-, 0, \cdot, 1\rangle$ signatura těles: · je binární funkční, 1 konstantní symbol
+- $\langle+,-, 0, \cdot, 1, \leq\rangle$ signatura uspořádaných těles: $\leq$ je binární relační symbol,
+- $\langle-, \wedge, \vee, \perp, \top\rangle$ signatura Booleových algeber: $\wedge, \vee$ jsou binární funkční symboly, $\perp, \top$ jsou konstantní symboly,
+- $\langle S,+, \cdot, 0, \leq\rangle$ signatura aritmetiky: $S$ je unární funkční symbol ('successor').
+Kromě běžných symbolů relací, funkcí a konstant (známých např. z logiky nebo z aritmetiky) typicky používáme pro relační symboly $P, Q, R, \ldots$, pro funkční symboly $f, g, h, \ldots$, a pro konstantní symboly $c, d, a, b, \ldots$
+
+Strukturu dané signatury získáme tak, že na nějaké neprázdné doméně zvolíme realizace (také říkáme interpretace) všech relačních a funkčních symbolů (a konstant), tj. konkrétní relace resp. funkce příslušných arit. (V případě konstantního symbolu je jeho realizací zvolený prvek z domény. $)^7$
+${ }^5$ Signaturu si můžete představovat analogicky definici třídy v OOP, struktury potom odpovídají objektům této třídy (v 'programovacím jazyce' teorie množin).
+${ }^6 \mathrm{Ne}$ každá struktura $\mathrm{v}$ této signatuře je částečné uspořádání, $\mathrm{k}$ tomu ještě potřebujeme, aby spln̆ovala př́slušné axiomy.
+${ }^7 \mathrm{Na}$ tom, jaké konkrétní symboly v signatuře použijeme, nezáleží, můžeme je interpretovat libovolně. Například to, že máme symbol + neznamená, že by jeho interpretace musela mít cokoliv společného se sčítáním (tedy kromě toho, že to bude také binární funkce).
+6.3.1 Jazyk
+Při specifikaci jazyka nejprve stanovíme, v jakého typu jsou struktury, které chceme popisovat, tj. určíme signaturu. Dále přidáme informaci, zda je jazyk $s$ rovností nebo ne, tj. zda ve formulích můžeme také používat symbol '=' vyjadřující rovnost (identitu) prvků v doméně struktur. ${ }^{10}$ Do jazyka patří následující:
+- spočetně mnoho proměnných $x_0, x_1, x_2, \ldots$ (ale píšeme také $x, y, z, \ldots ;$ množinu všech proměnných označíme Var),
+- relační, funkční a konstantní symboly ze signatury, a symbol = jde-li o jazyk s rovností,
+- univerzální a existenční kvantifikátory $(\forall x),(\exists x)$ pro každou proměnnou $x \in$ Var, $^{11}$
+- symboly pro logické spojky $\neg, \wedge, \vee, \rightarrow, \leftrightarrow$ a závorky $($,$) .$
+Podobně jako symbol $\square$ zastupující libovolnou binární logickou spojku budeme někdy psát $(Q x)$ pro kvantifikátor $(\forall x)$ nebo $(\exists x)$.
+
+Symbolům ze signatury říkáme mimologické, ostatní jsou logické. Jazyk musí obsahovat alespoň jeden relační symbol (bud' rovnost, nebo v signatuře)..$^{12}$
+
+Jazyk tedy specifikujeme pomocí signatury a informace 's rovností' (popř. 'bez rovnosti').
+Definice 6.2.3 (Struktura). Struktura v signatuře $\langle\mathcal{R}, \mathcal{F}\rangle$ je trojice $\mathcal{A}=\left\langle A, \mathcal{R}^{\mathcal{A}}, \mathcal{F}^{\mathcal{A}}\right\rangle$, kde
+- A je neprázdná množina, říkáme jí doména (také univerzum),
+- $\mathcal{R}^{\mathcal{A}}=\left\{R^{\mathcal{A}} \mid R \in \mathcal{R}\right\}$ kde $R^{\mathcal{A}} \subseteq A^{\operatorname{ar}(R)}$ je interpretace relačního symbolu $R$,
+- $\mathcal{F}^{\mathcal{A}}=\left\{f^{\mathcal{A}} \mid f \in \mathcal{F}\right\}$ kde $f^{\mathcal{A}}: A^{\operatorname{ar}(R)} \rightarrow A$ je interpretace funkčního symbolu $f$ (speciálně pro konstantní symbol $c \in \mathcal{F}$ máme $c^{\mathcal{A}} \in A$ ).
+6.3.2 Termy
+Termy jsou syntaktické 'výrazy' složené z proměnných, konstantních symbolů a funkčních symbolů.
+Definice 6.3.1 (Termy). Termy jazyka $L$ jsou konečné nápisy definované induktivně:
+- každá proměnná a každý konstantní symbol z $L$ je term,
+- je-li $f$ funkční symbol z $L$ arity $n$ a jsou-li $t_1, \ldots, t_n$ termy, potom nápis $f\left(t_1, t_2, \ldots, t_n\right)$ je také term.
+Množinu všech termů jazyka $L$ označíme $\operatorname{Term}_L$.
+Při zápisu termů obsahujících binární funkční symbol můžeme používat infixový zápis, např. $\left(t_1+t_2\right)$ znamená $+\left(t_1, t_2\right)$. Závorky někdy vynecháváme, je-li struktura termu ('priorita operátorů') zřejmá.
+
+Podterm je podřetězec termu, který je sám termem (je to tedy bud' celý term, nebo se vyskytl jako nějaké $t_i$ při konstrukci termu).
+
+Pokud term neobsahuje proměnnou, ř́káme mu konstantní (ground), například $((S(0)+$ $S(0)) \cdot S(S(0)))$ je konstantní term v jazyce aritmetiky. ${ }^{13}$
+
+Strom termu $t$, označme Tree $(t)$, je definován podobně jako strom výroku, v listech jsou proměnné nebo konstantní symboly, ve vnitřních vrcholech jsou funkční symboly, jejichž arita je rovna počtu synů.
+
+### (P14) Atomická formule, formule, sentence, otevřené formule.
+Definice 6.3.3 (Atomická formule). Atomická formule jazyka $L$ je nápis $R\left(t_1, \ldots, t_m\right)$, kde $R$ je $n$-ární relační symbol z $L$ (včetně $=$ jde-li o jazyk s rovností) a $t_i \in \operatorname{Term}_L$.
+
+U binárních relačních symbolů často používáme infixový zápis, např. atomickou formuli $\leq(x, y)$ zapíšeme jako $x \leq y$, a (je-li jazyk s rovností) místo $=\left(t_1, t_2\right)$ budeme psát $t_1=t_2$. Příklad 6.3.4. Uved'me několik příkladů atomických formulí:
+- $R(f(f(x)), c, f(d))$ kde $R$ je ternární relační, $f$ unární funkční, $c, d$ konstantní symboly,
+- $(x \cdot x)+(y \cdot y) \leq(x+y) \cdot(x+y)$ v jazyce uspořádaných těles,
+- $x \cdot y \leq(S(0)+x) \cdot y \mathrm{v}$ jazyce aritmetiky,
+- $\neg(x \wedge y) \vee \perp=\perp \mathrm{v}$ jazyce Booleových algeber
+Definice 6.3.5 (Formule). Formule jazyka $L$ jsou konečné nápisy definované induktivně:
+- každá atomická formule jazyka $L$ je formule,
+- jsou-li $\varphi, \psi$ formule, potom $(\varphi \wedge \psi),(\varphi \vee \psi),(\varphi \rightarrow \psi)$, a $(\varphi \leftrightarrow \psi)$ jsou také formule,
+- je-li $\varphi$ formule a $x$ proměnná, potom $((\forall x) \varphi)$ a $((\exists x) \varphi)$ jsou také formule.
+Podformule je podřetězec, který je sám o sobě formulí. Strom formule, označíme Tree( $(\varphi)$, je definován takto: strom atomické formule $\varphi=R\left(t_1, \ldots, t_n\right)$ má $\mathrm{v}$ kořeni relační symbol $R$, a k němu jsou připojeny stromy Tree $\left(t_i\right)$. Není-li $\varphi$ atomická, strom zkonstruujeme obdobně jako strom výroku. ${ }^{14}$ Při zápisu formulí používáme obdobné konvence jako ve výrokové logice, $((\forall x) \varphi)$ tedy můžeme psát $(\forall x) \varphi \cdot{ }^{15}$
+Volné a vázané proměnné
+Význam formule ${ }^{16}$ může, nebo nemusí záviset na proměnných, které se v ní vyskytují: srovnejte $x \leq 0$ a $(\exists x)(x \leq 0)$ (a co teprve $x \leq 0 \vee(\exists x)(x \leq 0)$ ). Nyní tento koncept upřesníme a zavedeme potřebnou terminologii.
+
+Výskytem proměnné $x$ ve formuli $\varphi$ myslíme list Tree $(\varphi)$ označený $x .{ }^{17}$ Výskyt je vázaný, je-li součástí nějaké podformule (podstromu) začínající $(Q x)$. Není-li výskyt vázaný, je volný.
+Proměnná je volná ve $\varphi$, pokud má ve $\varphi$ volný výskyt, a vázaná ve $\varphi$, pokud má ve $\varphi$ vázaný výskyt. Zápis $\varphi\left(x_1, \ldots, x_n\right)$ znamená, že $x_1, \ldots, x_n$ jsou všechny volné proměnné ve formuli $\varphi$.
+
+Definice 6.3.9 (Otevřená a uzavřená formule). Formule je otevřená, neobsahuje-li žádný kvantifikátor, a uzavřená (neboli sentence), pokud nemá žádnou volnou proměnnou
+
+Každá atomická formule je otevřená, otevřené formule jsou jen kombinace atomických pomocí logických spojek. Formule může být otevřená i uzavřená zároveň, v tom případě jsou všechny její termy konstantní. Formule je uzavřená, právě když nemá žádnou volnou proměnnou. $^{18}$
+${ }^{18}$ Neplatí ale, že formule je otevřená, pokud nemá žádnou vázanou proměnnou, viz formule $(\forall x) 0=1$.
+
+### (P15) Instance formule, substituovatelnost, varianta formule.
+Definice 6.3.13 (Substituovatelnost a instance). Term $t$ je substituovatelný za proměnnou $x$ ve formuli $\varphi$, pokud po simultánním nahrazení všech volných výskyti̊ $x$ ve $\varphi$ za $t$ nevznikne ve $\varphi$ žádný vázaný výskyt proměnné z $t$. $\mathrm{V}$ tom případě říkáme vzniklé formuli instance $\varphi$ vzniklá substitucí $t$ za $x$, a označujeme ji $\varphi(x / t)$.
+
+Poznámka 6.3.14. Všimněte si, že term $t$ není substituovatelný za $x$ do $\varphi$, právě když $x$ má volný výskyt v nějaké podformuli $\varphi$ tvaru $(Q y) \psi$ a proměnná $y$ se vyskytuje $\mathrm{v} t$. Speciálně, konstantní termy jsou vždy substituovatelné.
+Definice 6.3.15 (Varianta). Má-li formule $\varphi$ podformuli tvaru $(Q x) \psi$ a je-li $y$ proměnná, taková, že
+- $y$ je substituovatelná za $x$ do $\psi$ a
+- $y$ nemá volný výskyt $\mathrm{v} \psi$,
+potom nahrazením podformule $(Q x) \psi$ formulí $(Q y) \psi(x / y)$ vznikne varianta formule $\varphi$ v podformuli $(Q x) \psi$. Varianta ř́íkáme i výsledku postupné variace ve více podformulích.
+
+Všimněte si, že požadavek na proměnnou $y$ z definice varianty je vždy splněn, pokud se $y$ nevyskytuje ve formuli $\varphi$.
+
+### (P16) Pravdivostní hodnota formule ve struktuře při ohodnocení, platnost formule ve struktuře.
+6.4.2 Hodnota termu
+Mějme term $t$ jazyka $L=\langle\mathcal{R}, \mathcal{F}\rangle$ (s rovností nebo bez), a $L$-strukturu $\mathcal{A}=\left\langle A, \mathcal{R}^{\mathcal{A}}, F^{\mathcal{A}}\right\rangle$. Ohodnocení proměnných $\mathrm{v}$ množině $A$ je libovolná funkce $e:$ Var $\rightarrow A$.
+
+Definice 6.4.4 (Hodnota termu). Hodnota termu t ve struktuře $\mathcal{A}$ pr̆i ohodnocení e, kterou značíme $t^{\mathcal{A}}[e]$, je dána induktivně:
+- $x^{\mathcal{A}}[e]=e(x)$ pro proměnnou $x \in \operatorname{Var}$,
+- $c^{\mathcal{A}}[e]=c^{\mathcal{A}}$ pro konstantní symbol $c \in \mathcal{F}$, a
+- je-li $t=f\left(t_1, \ldots, t_n\right)$ složený term, kde $f \in \mathcal{F}$, potom:
+$$
+t^{\mathcal{A}}[e]=f^{\mathcal{A}}\left(t_1^{\mathcal{A}}[e], \ldots, t_n^{\mathcal{A}}[e]\right)
+$$
+Poznámka 6.4.5. Všimněte si, že hodnota termu závisí pouze na ohodnocení proměnných vyskytujících se v něm. Speciálně, je-li $t$ konstantní term, jeho hodnota na ohodnocení nezávisí. Obecně, každý term $t$ reprezentuje termovou funkci $f_t^{\mathcal{A}}: A^k \rightarrow A$, kde $k$ je počet proměnných v $t$, a konstantním termům odpovídají konstantní funkce.
+Definice 6.4.7 (Pravdivostní hodnota). Mějme formuli $\varphi$ v jazyce $L$, strukturu $\mathcal{A} \in \mathrm{M}(L)$, a ohodnocení proměnných $e: \operatorname{Var} \rightarrow A$. Pravdivostni hodnota $\varphi$ v $\mathcal{A}$ při ohodnocení $e$, $\mathrm{PH}^{\mathcal{A}}(\varphi)[e]$, je definována induktivně podle struktury formule:
+Pro atomickou formuli $\varphi=R\left(t_1, \ldots, t_n\right)$ máme
+$$
+\mathrm{PH}^{\mathcal{A}}(\varphi)[e]= \begin{cases}1 & \text { pokud }\left(t_1^{\mathcal{A}}[e], \ldots, t_n^{\mathcal{A}}[e]\right) \in R^{\mathcal{A}}, \\ 0 & \text { jinak. }\end{cases}
+$$
+Speciálně, je-li $\varphi$ tvaru $t_1=t_2$, potom $\mathrm{PH}^{\mathcal{A}}(\varphi)[e]=1$ právě $\operatorname{když~}\left(t_1^{\mathcal{A}}[e], t_2^{\mathcal{A}}[e]\right) \in=^{\mathcal{A}}$, kde $=^{-\mathcal{A}}$ je identita na $A$, tj. právě když $t_1^{\mathcal{A}}[e]=t_2^{\mathcal{A}}[e]$ (obě strany rovnosti jsou stejný prvek $a \in A$ ).
+Pravdivostní hodnota negace je definována takto:
+$$
+\mathrm{PH}^{\mathcal{A}}(\neg \varphi)[e]=f_{\neg}\left(\mathrm{PH}^{\mathcal{A}}(\varphi)[e]\right)=1-\mathrm{PH}^{\mathcal{A}}(\varphi)[e]
+$$
+Obdobně pro binární logické spojky, jsou-li $\varphi, \psi$ a $\square \in\{\wedge, \vee, \rightarrow, \leftrightarrow\}$, potom:
+$$
+\mathrm{PH}^{\mathcal{A}}(\varphi \square \psi)[e]=f_{\square}\left(\mathrm{PH}^{\mathcal{A}}(\varphi)[e], \mathrm{PH}^{\mathcal{A}}(\psi)[e]\right)
+$$
+Zbývá definovat pravdivostní hodnotu pro kvantifikátory, tj. formule tvaru $(Q x) \varphi$. Budeme potřebovat následující značení: Změníme-li v ohodnocení $e:$ Var $\rightarrow A$ hodnotu pro proměnnou $x$ na $a$, výsledné ohodnocení zapíšeme jako $e(x / a)$. Platí tedy $e(x / a)(x)=a$. Pravdivostní hodnotu pro $(Q x) \varphi$ definujeme takto:
+$$
+\begin{aligned}
+& \mathrm{PH}^{\mathcal{A}}((\forall x) \varphi)[e]=\min _{a \in A}\left(\mathrm{PH}^{\mathcal{A}}(\varphi)[e(x / a)]\right) \\
+& \mathrm{PH}^{\mathcal{A}}((\exists x) \varphi)[e]=\max _{a \in A}\left(\mathrm{PH}^{\mathcal{A}}(\varphi)[e(x / a)]\right)
+\end{aligned}
+$$
+Tedy v ohodnocení $e$ nastavíme hodnotu proměnné $x$ postupně na všechny prvky $a \in A$ a požadujeme, aby PH byla rovna 1 vždy (v případě $\forall$ ) nebo alespoň jednou (v případě $\exists) .{ }^{19}$
+Poznámka 6.4.8. Pravdivostní hodnota závisí pouze na ohodnocení volných proměnných. Speciálně, je-li $\varphi$ sentence, potom její pravdivostní hodnota nezávisí na ohodnocení.
+6.4.4 Platnost
+Na základě pravdivostní hodnoty už můžeme definovat klíčový pojem sémantiky, platnost.
+Definice 6.4.10 (Platnost ve struktuře). Mějme formuli $\varphi$ a strukturu $\mathcal{A}$ (ve stejném jazyce).
+- Je-li $e$ ohodnocení a $\operatorname{PH}^{\mathcal{A}}(\varphi)[e]=1$, potom říkáme, že $\varphi$ platí v $\mathcal{A}$ při ohodnocení e, a píšeme $\mathcal{A} \models \varphi[e]$. (V opačném případě říkáme, že $\varphi$ neplatí $v \mathcal{A}$ při ohodnocení $e$, a píšeme $\mathcal{A} \not \models \varphi[e]$.)
+- Pokud $\varphi$ platí v $\mathcal{A}$ při každém ohodnocení $e:$ Var $\rightarrow A$, potom říkáme, že $\varphi$ je pravdivá (platí) $v \mathcal{A}$, a píšeme $\mathcal{A} \models \varphi$.
+- Pokud $\mathcal{A} \models \neg \varphi$, tj. $\varphi$ neplatí v $\mathcal{A}$ při žádném ohodnocení (pro každé $e$ máme $\mathcal{A} \forall=\varphi[e]$ ), potom je $\varphi$ lživá $v \mathcal{A} .^{20}$
+
+Shrňme několik jednoduchých vlastností, nejprve týkajících se platnosti při ohodnocení. Bud' $\mathcal{A}$ struktura, $\varphi, \psi$ formule, a $e$ ohodnocení.
+- $\mathcal{A}=\neg \varphi[e]$ právě když $\mathcal{A} \not \models \varphi[e]$,
+- $\mathcal{A} \models(\varphi \wedge \psi)[e]$ právě když $\mathcal{A} \models \varphi[e]$ a $\mathcal{A} \models \psi[e]$,
+- $\mathcal{A} \models(\varphi \vee \psi)[e]$ právě když $\mathcal{A} \models \varphi[e]$ nebo $\mathcal{A} \models \psi[e]$,
+- $\mathcal{A} \models(\varphi \rightarrow \psi)[e]$ právě když platí: jestliže $\mathcal{A} \models \varphi[e]$ potom $\mathcal{A} \models \psi[e]$,
+- $\mathcal{A} \models(\varphi \leftrightarrow \psi)[e]$ právě když platí: $\mathcal{A} \models \varphi[e]$ právě když $\mathcal{A} \models \psi[e]$,
+- $\mathcal{A} \models(\forall x) \varphi[e]$ právě když $\mathcal{A} \models \varphi[e(x / a)]$ pro všechna $a \in A$,
+- $\mathcal{A} \models(\exists x) \varphi[e]$ právě když $\mathcal{A} \models \varphi[e(x / a)]$ pro nějaké $a \in A$.
+- Je-li term $t$ substituovatelný za proměnnou $x$ do formule $\varphi$, potom
+$$
+\mathcal{A} \models \varphi(x / t)[e] \text { právě když } \mathcal{A} \models \varphi[e(x / a)] \text { pro } a=t^{\mathcal{A}}[e] .
+$$
+- Je-li $\psi$ varianta $\varphi$, potom $\mathcal{A} \models \varphi[e]$ právě když $\mathcal{A} \models \psi[e]$.
+
+### (P17) Kompletní teorie v predikátové logice, elementární ekvivalence.
+Definice 6.5.1. Teorie je kompletní, je-li bezesporná a každá sentence je v ní bud' pravdivá, nebo lživá.
+
+Nemůžeme ale říci, že je teorie kompletní, právě když má jediný model. Máme-li totiž jeden model, dostáváme z něj nekonečně mnoho jiných, ale izomorfních modelů, tj. lišících se jen pojmenováním prvků univerza. ${ }^{23}$ Uvažovat jediný model 'až na izomorfismus' by ale nebylo dostatečné. Správným pojmem je tzv. elementární ekvivalence:
+
+Definice 6.5.2. Struktury $\mathcal{A}, \mathcal{B}$ (v témž jazyce) jsou elementárně ekvivalentní, pokud v nich platí tytéž sentence. Značíme $\mathcal{A} \equiv \mathcal{B}$.
+
+Pozorování 6.5.4. Teorie je kompletní, právě když má právě jeden model až na elementární ekvivalenci.
+
+### (P18) Podstruktura, generovaná podstruktura, expanze a redukt struktury.
+Podstruktura
+Pojem podstruktury zobecňuje podgrupy, podprostory vektorového tělesa, a indukované podgrafy grafu: vybereme nějakou podmnožinu $B$ univerza struktury $\mathcal{A}$, a vytvoříme na ní strukturu $\mathcal{B}$ stejné signatury, která 'zdědí' relace, operace, a konstanty. Abychom to mohli provést, potřebujeme, aby byla množina $B$ uzavřená na všechny operace a obsahovala všechny konstanty. $^{24}$
+
+Definice 6.6.1 (Podstruktura). Mějme strukturu $\mathcal{A}=\left\langle A, \mathcal{R}^{\mathcal{A}}, \mathcal{F}^{\mathcal{A}}\right\rangle \mathrm{v}$ signatuře $\langle\mathcal{R}, \mathcal{F}\rangle$. Struktura $\mathcal{B}=\left\langle B, \mathcal{R}^{\mathcal{B}}, \mathcal{F}^{\mathcal{B}}\right\rangle$ je (indukovaná) podstruktura $\mathcal{A}$, značíme $\mathcal{B} \subseteq \mathcal{A}$, jestliže
+- $\emptyset \neq B \subseteq A$
+- $R^{\mathcal{B}}=R^{\mathcal{A}} \cap B^{\mathrm{ar}(\mathrm{R})}$ pro každý relační symbol $R \in \mathcal{R}$,
+- $f^{\mathcal{B}}=f^{\mathcal{A}} \cap\left(B^{\operatorname{ar}(\mathrm{f})} \times B\right)$ pro každý funkční symbol $f \in \mathcal{F}$ (tj. funkce $f^{\mathcal{B}}$ je restrikce $f^{\mathcal{A}}$ na množinu $B$, a její výstupy jsou všechny také z $B$ ),
+- speciálně, pro každý konstantní symbol $c \in \mathcal{F}$ máme $c^{\mathcal{B}}=c^{\mathcal{A}} \in B$.
+Množina $C \subseteq A$ je uzavřená na funkci $f: A^n \rightarrow A$, pokud $f\left(x_1, \ldots, x_n\right) \in C$ pro všechna $x_i \in C$. Platí:
+
+Pozorování 6.6.2. Množina $\emptyset \neq C \subseteq A$ je univerzem podstruktury struktury $\mathcal{A}$, právě když je $C$ uzavřená na všechny funkce struktury $\mathcal{A}$ (včetně konstant).
+$\mathrm{V}$ tom případě říkáme této podstruktuře restrikce $\mathcal{A}$ na množinu $C$, a značíme ji $\mathcal{A} \uparrow C$.
+Platnost v podstrukture
+Jak je tomu s platností formulí v podstruktuře? Uved'me několik jednoduchých pozorování o otevřených formulích.
+
+Pozorování 6.6.4. Je-li $\mathcal{B} \subseteq \mathcal{A}$, potom pro každou otevřenou formuli $\varphi$ a ohodnocení proměnných e: $\operatorname{Var} \rightarrow B$ platí: $\mathcal{B} \models \varphi[e]$ právě $k d y \check{z} \mathcal{A} \models \varphi[e]$.
+
+Důkaz. Pro atomické formule je zřjejmé, dále snadno dokážeme indukcí podle struktury formule.
+
+Důsledek 6.6.5. Otevřená formule platí ve struktuře $\mathcal{A}$, právě když platí v každé podstruktuře $\mathcal{B} \subseteq \mathcal{A}$
+Říkáme, že teorie $T$ je otevřená, jsou-li všechny její axiomy otevřené formule.
+Důsledek 6.6.6. Modely otevřené teorie jsou uzavřené na podstruktury, tj. každá podstruktura modelu otevřené teorie je také model této teorie.
+Generovaná podstruktura
+Co dělat, máme-li podmnožinu univerza, která není uzavřená na operace struktury? V tom případě uvážíme uzávěr této množiny na operace. ${ }^{26}$
+
+Definice 6.6.9. Mějme strukturu $\mathcal{A}=\left\langle A, \mathcal{R}^{\mathcal{A}}, \mathcal{F}^{\mathcal{A}}\right\rangle$ a neprázdnou podmnožinu $X \subseteq A$. Označme jako $B$ nejmenší podmnožinu $A$, která obsahuje množinu $X$ a je uzavřená na všechny funkce struktury $\mathcal{A}$ (tj. také obsahuje všechny konstanty). Potom o podstruktuře $\mathcal{A}\lceil B$ říkáme, že je generovaná množinou $X$, a značíme ji $\mathcal{A}\langle X\rangle$.
+
+Přiklad 6.6.10. Uvažme struktury $\mathbb{\mathbb { Q }}=\langle Q,+, \cdot, 0\rangle, \underline{\mathbb{Z}}=\langle Z,+, \cdot, 0\rangle$, a $\underline{\mathbb{N}}=\langle N,+, \cdot, 0\rangle$. Potom $\underline{\mathbb{Q}}\langle\{1\}\rangle=\underline{\mathbb{N}}, \underline{\mathbb{Q}}\langle\{-1\}\rangle=\underline{\mathbb{Z}}$, a $\underline{\mathbb{Q}}\langle\{2\}\rangle$ je podstruktura $\underline{\mathbb{N}}$ na množině všech sudých čísel.
+Přiklad 6.6.11. Pokud $\mathcal{A}$ nemá žádné operace (ani konstanty), např. je-li to graf či uspořádání, potom není čím generovat, a $\mathcal{A}\langle X\rangle=\mathcal{A} \uparrow X$.
+Expanze a redukt
+Prozatím jsme konstruovali nové struktury změnou univerza. Můžeme ale také nechat univerzum stejné, a přidat resp. odebrat relace, operace, a konstanty. Výsledku takové operace říkáme expanze resp. redukt. Všimněte si, že jde o strukturu v jiné signatuře.
+
+Definice 6.6.12 (Expanze a redukt). Mějme jazyky $L \subseteq L^{\prime}, L$-strukturu $\mathcal{A}$, a $L^{\prime}$-strukturu $\mathcal{A}^{\prime}$ na stejné doméně $A=A^{\prime}$. Jestliže je interpretace každého symbolu [relačního, funkčního, konstantního] stejná [relace, funkce, konstanta] v $\mathcal{A}$ i v $\mathcal{A}^{\prime}$ potom říkáme, že struktura $\mathcal{A}^{\prime}$ je expanzí struktury $\mathcal{A}$ do jazyka $L^{\prime}$ (také říkáme, že je $L^{\prime}$-expanzí) a že struktura $\mathcal{A}$ je reduktem struktury $\mathcal{A}^{\prime}$ na jazyk $L$ (také ř́́káme, že je $L$-reduktem).
+
+Přiklad 6.6.13. Mějme grupu celých čísel $\langle\mathbb{Z},+,-, 0\rangle$. Potom struktura $\langle\mathbb{Z},+\rangle$ je jejím reduktem, zatímco struktura $\langle\mathbb{Z},+,-, 0, \cdot, 1\rangle$ (okruh celých čísel) je její expanzí.
+Přiklad 6.6.14. Mějme graf $\mathcal{G}=\left\langle G, E^{\mathcal{G}}\right\rangle$. Potom struktura $\left\langle G, E^G, c_v^{\mathcal{G}}\right\rangle_{v \in G} \mathrm{v}$ jazyce $\left\langle E, c_v\right\rangle_{v \in G}$, kde $c_v^{\mathcal{G}}=v$ pro všechny vrcholy $v \in G$, je expanzí $\mathcal{G}$ o jména prvků (z množiny $G$ ).
+
+### (P19) Definovatelnost ve struktuře.
+6.8 Definovatelnost ve struktuře
+Formuli s jednou volnou proměnnou $x$ můžeme chápat jako vlastnost prvků. $\mathrm{V}$ dané struktuře taková formule definuje množinu prvků, které tuto vlastnost splňují, tj. takových, že formule platí při ohodnocení $e$, ve kterém $e(x)=a$. Máme-li formuli se dvěma volnými proměnnými, definuje binární relaci, atp. Nyní tento koncept formalizujeme. Připomeňme, že zápis $\varphi\left(x_1, \ldots, x_n\right)$ znamená, že $x_1, \ldots, x_n$ jsou právě všechny volné proměnné formule $\varphi$.
+Definice 6.8.1 (Definovatelné množiny). Mějme formuli $\varphi\left(x_1, \ldots, x_n\right)$ a strukturu $\mathcal{A} \mathrm{v}$ témž jazyce. Množina definovaná formulí $\varphi\left(x_1, \ldots, x_n\right)$ ve struktuře $\mathcal{A}$, značíme $\varphi^{\mathcal{A}}\left(x_1, \ldots, x_n\right)$, je:
+$$
+\varphi^{\mathcal{A}}\left(x_1, \ldots, x_n\right)=\left\{\left(a_1, \ldots, a_n\right) \in A^n \mid \mathcal{A} \models \varphi\left[e\left(x_1 / a_1, \ldots, x_n / a_n\right)\right]\right\}
+$$
+Zkráceně totéž zapíšeme také jako $\varphi^{\mathcal{A}}(\bar{x})=\left\{\bar{a} \in A^n \mid \mathcal{A} \models \varphi[e(\bar{x} / \bar{a})]\right\}$.
+Přǐklad 6.8.2. Uved'me několik příkladů:
+- Formule $\neg(\exists y) E(x, y)$ definuje množinu všech izolovaných vrcholo̊ v daném grafu.
+- Uvažme těleso reálných čísel $\mathbb{R}$. Formule $(\exists y)(y \cdot y=x) \wedge \neg(x=0)$ definuje množinu všech kladných reálných čísel.
+- Formule $x \leq y \wedge \neg(x=y)$ definuje $\mathrm{v}$ dané uspořádané množině $\left\langle S, \leq^S\right\rangle$ relaci ostrého uspor̃ádání $<$.
+
+Často se také hodí mluvit o vlastnostech prvků relativně k jiným prvkům dané struktury. To nelze vyjádřit čistě syntakticky, ale můžeme za některé z volných proměnných dosadit prvky struktury jako parametry. Zápisem $\varphi(\bar{x}, \bar{y})$ myslíme, že formule $\varphi$ má volné proměnné $x_1, \ldots, x_n, y_1, \ldots, y_k$ (pro nějaká $n, k$ ).
+
+Definice 6.8.3. Mějme formuli $\varphi(\bar{x}, \bar{y})$, kde $|\bar{x}|=n$ a $|\bar{y}|=k$, strukturu $\mathcal{A} \vee$ témž jazyce, a $k$-tici prvků $\bar{b} \in A^k$. Množina definovaná formulí $\varphi(\bar{x}, \bar{y})$ s parametry $\bar{b}$ ve struktuře $\mathcal{A}$, značíme $\varphi^{\mathcal{A}, \bar{b}}(\bar{x}, \bar{y})$, je:
+$$
+\varphi^{\mathcal{A}, \bar{b}}(\bar{x}, \bar{y})=\left\{\bar{a} \in A^n \mid \mathcal{A} \models \varphi[e(\bar{x} / \bar{a}, \bar{y} / \bar{b})]\right\}
+$$
+Pro strukturu $\mathcal{A}$ a podmnožinu $B \subseteq A$ označíme $\operatorname{Df}^n(\mathcal{A}, B)$ množinu všech množin definovatelných ve struktuře $\mathcal{A}$ s parametry pocházejícími z $B$.
+Přiklad 6.8.4. Pro $\varphi(x, y)=E(x, y)$ je $\varphi^{\mathcal{G}, v}(x, y)$ množina všech sousedů vrcholu $v$.
+Pozorování 6.8.5. Množina $\operatorname{Df}^n(\mathcal{A}, B)$ je uzavřená na doplněk, průnik, sjednocení, a obsahuje $\emptyset$ a $A^n$. Jde tedy o podalgebru potenční algebry $\mathcal{P}\left(A^n\right)$.
+
+### (P20) Extenze o definice.
+Definice relačního symbolu
+Nejjednodušším případem je definování nového relačního symbolu $R\left(x_1, \ldots, x_n\right)$. Jako definice může sloužit libovolná formule $\mathrm{s} n$ volnými proměnnými $\psi\left(x_1, \ldots, x_n\right)$. Přiklad 6.7.5. Uved'me nejprve několik příkladů:
+- Jakoukoliv teorii v jazyce s rovností můžeme rozšíritit o binární relační symbol $\neq$, který definujeme formulí $\neg x_1=x_2$. To znamená, že požadujeme, aby platilo: $x_1 \neq x_2 \leftrightarrow \neg x_1=$ $x_2$.
+- Teorii uspořádání můžeme rozšíritit o symbol < pro ostré uspořádání, který definujeme formulí $x_1 \leq x_2 \wedge \neg x_1=x_2$. To znamená, že požadujeme, aby platilo $x_1<x_2 \leftrightarrow x_1 \leq$ $x_2 \wedge \neg x_1=x_2$.
+- V aritmetice můžeme zavést symbol $\leq$, pomocí $x_1 \leq x_2 \leftrightarrow(\exists y)\left(x_1+y=x_2\right)$.
+Nyní uvedeme definici:
+Definice 6.7.6 (Definice relačního symbolu). Mějme teorii $T$ a formuli $\psi\left(x_1, \ldots, x_n\right)$ v jazyce $L$. Označme jako $L^{\prime}$ rozš́írení jazyka $L$ o nový $n$-ární relační symbol $R$. Extenze teorie $T$ o definici $R$ formuli $\psi$ je $L^{\prime}$-teorie:
+$$
+T^{\prime}=T \cup\left\{R\left(x_1, \ldots, x_n\right) \leftrightarrow \psi\left(x_1, \ldots, x_n\right)\right\}
+$$
+Všimněte si, že každý model $T$ lze jednoznačně expandovat na model $T^{\prime}$. Z Tvrzení 6.7.3 potom ihned plyne následující:
+Důsledek 6.7.7. $T^{\prime}$ je konzervativní extenze $T$.
+Ukážeme si ještě, že nový symbol lze ve formulích nahradit jeho definicí, a získat tak (T-ekvivalentní) formuli v původním jazyce:
+Tvrzení 6.7.8. Pro každou $L^{\prime}$-formuli $\varphi^{\prime}$ existuje L-formule $\varphi$ taková, že $T^{\prime} \models \varphi^{\prime} \leftrightarrow \varphi$. Důkaz. Je třeba nahradit atomické podformule s novým symbolem $R$, tj. tvaru $R\left(t_1, \ldots, t_n\right)$. Takovou podformuli nahradíme formulí $\psi^{\prime}\left(x_1 / t_1, \ldots, x_n / t_n\right)$, kde $\psi^{\prime}$ je varianta $\psi$ zaručující substituovatelnost všech termů, tj. například přejmenujeme všechny vázané proměnné $\psi$ na zcela nové (nevyskytující se ve formuli $\varphi^{\prime}$ ). Definice funkčního symbolu
+Nový funkční symbol definujeme obdobným způsobem, musíme si ale být jisti, že definice dává jednoznačnou možnost, jak nový symbol interpretovat
+Př̌klad 6.7.9. Opět začneme příklady:
+- V teorii grup můžeme zavést binární funkční symbol - ${ }_b$ pomocí + a unárního - takto:
+$$
+x_1-{ }_b x_2=y \leftrightarrow x_1+\left(-x_2\right)=y
+$$
+Je zřejmé, že pro každá $x, y$ existuje jednoznačné $z$ splňující definici.
+- Uvažme teorii lineárních uspořádání, tj. teorii uspořádání spolu s axiomem linearity $x \leq y \vee y \leq x$. Definujme binární funkční symbol min takto:
+$$
+\min \left(x_1, x_2\right)=y \leftrightarrow y \leq x_1 \wedge y \leq x_2 \wedge(\forall z)\left(z \leq x_1 \wedge z \leq x_2 \rightarrow z \leq y\right)
+$$
+Existence a jednoznačnost platí díky linearitě. Pokud bychom ale měli pouze teorii uspořádání, taková formule by nebyla dobrou definicí: v některých modelech by $\min \left(x_1, x_2\right)$ pro některé prvky neexistovalo, selhala by tedy požadovaná jednoznačnost.
+Definice 6.7.10 (Definice funkčního symbolu). Mějme teorii $T$ a formuli $\psi\left(x_1, \ldots, x_n, y\right) \mathrm{v}$ jazyce $L$. Označme jako $L^{\prime}$ rozšírínení jazyka $L$ o nový $n$-ární funkční symbol $f$. Necht v teorii $T$ platí:
+- axiom existence $(\exists y) \psi\left(x_1, \ldots, x_n, y\right)$,
+- axiom jednoznačnosti $\psi\left(x_1, \ldots, x_n, y\right) \wedge \psi\left(x_1, \ldots, x_n, z\right) \rightarrow y=z$.
+Potom extenze teorie $T$ o definici $f$ formuli $\psi$ je $L^{\prime}$-teorie:
+$$
+T^{\prime}=T \cup\left\{f\left(x_1, \ldots, x_n\right)=y \leftrightarrow \psi\left(x_1, \ldots, x_n, y\right)\right\}
+$$
+Formule $\psi$ tedy definuje v každém modelu $(n+1)$-ární relaci, a po této relaci požadujeme, aby byla funkcí, tj. aby pro každou $n$-tici prvků existovala jednoznačná možnost, jak ji rozšíririt do $(n+1)$-tice, která je prvkem této relace. Všimněte si, že je-li definující formule $\psi$ tvaru $t\left(x_1, \ldots, x_n\right)=y$, kde $x_1, \ldots, x_n$ jsou proměnné $L$-termu $t$, potom axiomy existence a jednoznačnosti vždy platí.
+Opět platí, že každý model $T$ lze jednoznačně expandovat na model $T^{\prime}$, tedy:
+Důsledek 6.7.11. $T^{\prime}$ je konzervativní extenze $T$.
+A platí také analogické tvrzení o rozvádění definic:
+Tvrzení 6.7.12. Pro každou $L^{\prime}$-formuli $\varphi^{\prime}$ existuje L-formule $\varphi$ taková, že $T^{\prime} \models \varphi^{\prime} \leftrightarrow \varphi$. Definice konstantního symbolu
+Konstantní symbol je speciálním případem funkčního symbolu arity 0 . Platí tedy stejná tvrzení. Axiomy existence a jednoznačnosti jsou: $(\exists y) \psi(y)$ a $\psi(y) \wedge \psi(z) \rightarrow y=z$. A extenze o definici konstantního symbolu $c$ formulí $\psi(y)$ je teorie $T^{\prime}=T \cup\{c=y \leftrightarrow \psi(y)\}$. Příklad 6.7.13. Ukážeme si dva příklady:
+- Teorii aritmetiky můžeme rozšírit o definici konstantního symbolu 1 formulí $\psi(y)$ tvaru $y=S(0)$, přidáme tedy axiom $1=y \leftrightarrow y=S(0)$
+- Uvažme teorii těles a nový symbol $\frac{1}{2}$, definovaný formulí $y \cdot(1+1)=1$, tj. přidáním axiomu:
+$$
+\frac{1}{2}=y \leftrightarrow y \cdot(1+1)=1
+$$
+Zde nejde o korektní extenzi o definici, nebot' neplatí axiom existence. Ve dvouprvkovém tělese $\mathbb{Z}_2$ (a v každém tělese charakteristiky 2 ) nemá rovnice $y \cdot(1+1)=1$ řešení, nebot $1+1=0$
+Pokud ale vezmeme teorii těles charakteristiky různé od 2 , tj. přidáme-li $\mathrm{k}$ teorii těles axiom $\neg(1+1=0)$, potom už půjde o korektní extenzi o definici. Například v tělese $\mathbb{Z}_3$ máme $\frac{1}{2} \mathbb{Z}_3=2$
+Extenze o definice
+Máme-li $L$-teorii $T$ a $L^{\prime}$-teorii $T^{\prime}$, potom řekneme, že $T^{\prime}$ je extenzi $T$ o definice, pokud vznikla z $T$ postupnou extenzí o definice relačních a funkčních (příp. konstantních) symbolů. Vlastnosti, které jsme dokázali o extenzích o jeden symbol (at už relační nebo funkční), se snadno rozšíríí indukcí na více symbolů:
+Důsledek 6.7.14. Je-li $T^{\prime}$ extenze teorie $T$ o definice, potom platí:
+- Każdý model teorie T lze jednoznačně expandovat na model $T^{\prime}$.
+- $T^{\prime}$ je konzervativní extenze $T$.
+- Pro každou $L^{\prime}$-formuli $\varphi^{\prime}$ existuje L-formule $\varphi$ taková, že $T^{\prime} \models \varphi^{\prime} \leftrightarrow \varphi$.
+Na závěr ještě jeden příklad, na kterém si ukážeme i rozvádění definic:
+Příklad 6.7.15. V teorii $T=\{(\exists y)(x+y=0),(x+y=0) \wedge(x+z=0) \rightarrow y=z\}$ jazyka $L=\langle+, 0, \leq\rangle$ s rovností lze zavést $<$ a unární funkční symbol - přidáním axiomů:
+$$
+\begin{aligned}
+-x=y & \leftrightarrow x+y=0 \\
+x<y & \leftrightarrow x \leq y \wedge \neg(x=y)
+\end{aligned}
+$$
+Formule $-x<y\left(\mathrm{v}\right.$ jazyce $\left.L^{\prime}=\langle+,-, 0, \leq,<\rangle\right)$ s rovností) je $\mathrm{v}$ této extenzi o definice ekvivalentní následující formuli:
+$(\exists z)((z \leq y \wedge \neg(z=y)) \wedge x+z=0)$
+
+### (P21) Prenexní normální forma, Skolemova varianta.
+8.2.1 Prenexní normální forma
+Nejprve ukážeme postup, jakým můžeme z libovolné formule 'vytknout' kvantifikátory, tj. převést do tzv. prenexní normální formy, která začíná posloupností kvantifikátorů, a pokračuje už jen volnou formulí.
+Definice 8.2.2 (PNF). Formule $\varphi$ je v prenexní normální formě (PNF), je-li tvaru
+$$
+\left(Q_1 x_1\right) \ldots\left(Q_n x_n\right) \varphi^{\prime}
+$$
+kde $Q_i$ je kvantifikátor $\left(\forall\right.$ nebo $\exists$ ) a formule $\varphi^{\prime}$ je otevřená. Formuli $\varphi^{\prime}$ potom říkáme otevřené jádro $\varphi$ a $\left(Q_1 x_1\right) \ldots\left(Q_n x_n\right)$ je kvantifikátorový prefix.
+
+Je-li $\varphi$ formule v PNF a jsou-li všechny kvantifikátory univerzální, potom říkáme, že $\varphi$ je univerzální formule.
+Cílem této podsekce je ukázat následující tvrzení:
+Tvrzení 8.2.3 (Převod do PNF). Ke každé formuli $\varphi$ existuje ekvivalentní formule v prenexní normální formě.
+
+Algoritmus bude podobně jako převod do CNF založen na nahrazování podformulí ekvivalentními podformulemi, s cílem posunout kvantifikátory blíże ke kořeni stromu formule. Co myslíme ekvivalencí formulí $\varphi \sim \varphi^{\prime}$ ? To, že mají stejný význam, tj. v každém modelu a při každém ohodnocení proměnných mají touž pravdivostní hodnotu. Ekvivalentně, že platí $\models \varphi \leftrightarrow \varphi^{\prime}$. Budeme potr̃ebovat následující jednoduché pozorování:
+
+Pozorování 8.2.4. Nahradíme-li ve formuli $\varphi$ nějakou podformuli $\psi$ ekvivalentní formulí $\psi^{\prime}$, potom je i výsledná formule $\varphi^{\prime}$ ekvivalentní formuli $\varphi$.
+Převod je založen na opakovaném použití následujících syntaktických pravidel:
+Lemma 8.2.5. Označme jako $\bar{Q}$ kvantifikátor opačný ke $Q$. Necht́ $\varphi$ a $\psi$ jsou formule, a proměnná $x$ necht není volná ve formuli $\psi$. Potom platí:
+$$
+\begin{aligned}
+\neg(Q x) \varphi & \sim(\bar{Q} x) \neg \varphi \\
+(Q x) \varphi \wedge \psi & \sim(Q x)(\varphi \wedge \psi) \\
+(Q x) \varphi \vee \psi & \sim(Q x)(\varphi \vee \psi) \\
+(Q x) \varphi \rightarrow \psi & \sim(\bar{Q} x)(\varphi \rightarrow \psi) \\
+\psi \rightarrow(Q x) \varphi & \sim(Q x)(\psi \rightarrow \varphi)
+\end{aligned}
+$$
+8.2.2 Skolemova varianta
+Nyní jsme převedli naše axiomy na ekvivalentní sentence v prenexním tvaru. Pokud by některá sentence obsahovala pouze univerzální kvantifikátory, tj. byla tvaru
+$$
+\left(\forall x_1\right) \ldots\left(\forall x_n\right) \varphi\left(x_1, \ldots, x_n\right)
+$$
+kde $\varphi$ je otevřená, mohli bychom ji prostě nahradit jejím otevřeným jádrem $\varphi$, které je jí v tomto případě ekvivalentní. Jak si ale poradit s existenčními kvantifikátory, např. $(\exists x) \varphi(x)$, $(\forall x)(\exists y) \varphi(x, y)$, apod? Ty nejprve nahradíme jejich Skolemovou variantou.
+
+Definice 8.2.9 (Skolemova varianta). Mějme $L$-sentenci $\varphi v$ PNF, a necht všechny její vázané proměnné jsou různé. Necht' existenční kvantifikátory z prefixu $\varphi$ jsou $\left(\exists y_1\right), \ldots,\left(\exists y_n\right)$ (v tomto pořadí), a necht pro každé $i$ jsou $\left(\forall x_1\right), \ldots,\left(\forall x_{n_i}\right)$ právě všechny univerzální kvantifikátory předcházející kvantifikátor $\left(\exists y_i\right)$ v prefixu $\varphi$.
+
+Označme $L^{\prime}$ rozšír̃ení $L$ o nové $n_i$-ární funkční symboly $f_1, \ldots, f_n$, kde symbol $f_i$ je arity $n_i$, pro každé $i$. Skolemova varianta sentence $\varphi$ je $L^{\prime}$-sentence $\varphi_S$ vzniklá z $\varphi$ tak, že pro každé $i=1, \ldots, n$ :
+- odstraníme z prefixu kvantifikátor $\left(\exists y_i\right)$, a
+- substituujeme za proměnnou $y_i$ term $f_i\left(x_1, \ldots, x_{n_i}\right)$.
+Tomuto procesu říkáme také skolemizace.
+Přiklad 8.2.10. Skolemova varianta sentence
+$$
+\varphi=\left(\exists y_1\right)\left(\forall x_1\right)\left(\forall x_2\right)\left(\exists y_2\right)\left(\forall x_3\right) R\left(y_1, x_1, x_2, y_2, x_3\right)
+$$
+je sentence
+$$
+\varphi_S=\left(\forall x_1\right)\left(\forall x_2\right)\left(\forall x_3\right) R\left(f_1, x_1, x_2, f_2\left(x_1, x_2\right), x_3\right)
+$$
+kde $f_1$ je nový konstantní symbol a $f_2$ je nový binární funkční symbol.
+Poznámka 8.2.11. Nezapomeňte, že při skolemizaci musíme vycházet ze sentence! Například, máme-li formuli $(\exists y) E(x, y)$, není $E(x, c)$ její Skolemova varianta. Musíme napřed provést generální uzávěr $(\forall x)(\exists y) E(x, y)$, a potom správně skolemizovat jako $(\forall x) E(x, f(x))$, což je ekvivalentní otevřené formuli $E(x, f(x))$ (která říká něco mnohem slabšího než $E(x, c)$ ).
+
+### (P22) Izomorfismus struktur, izomorfní spektrum, $\omega$-kategorická teorie.
+9.2 Izomorfismus struktur
+Podívejme se blíže na pojem izomorfismu struktur, který zobecňuje izomorfismus grafů, vektorových prostorů, apod. Neformálně řečeno, struktury jsou izomorfní, pokud se liší jen pojmenováním konkrétních prvků.
+
+Definice 9.2.1. Mějme struktury $\mathcal{A}, \mathcal{B}$ jazyka $L=\langle\mathcal{R}, \mathcal{F}\rangle$. Izomorfismus $\mathcal{A}$ a $\mathcal{B}$ (nebo ' $\mathcal{A}$ na ') je bijekce $h: A \rightarrow B$ splñující následující vlastnosti:
+- Pro každý ( $n$-ární) funkční symbol $f \in \mathcal{F}$ a pro všechna $a_i \in A$ platí:
+$$
+h\left(f^{\mathcal{A}}\left(a_1, \ldots, a_n\right)\right)=f^{\mathcal{B}}\left(h\left(a_1\right), \ldots, h\left(a_n\right)\right)
+$$
+(Speciálně, je-li $c \in \mathcal{F}$ konstantní symbol, platí $h\left(c^{\mathcal{A}}\right)=c^{\mathcal{B}}$.)
+- Pro každý ( $n$-ární) relační symbol $R \in \mathcal{R}$ a pro všechna $a_i \in A$ platí:
+$$
+R^{\mathcal{A}}\left(a_1, \ldots, a_n\right) \text { právě když } R^{\mathcal{B}}\left(h\left(a_1\right), \ldots, h\left(a_n\right)\right)
+$$
+Pokud existuje, říkáme, že $\mathcal{A}$ a $\mathcal{B}$ jsou izomorfní (nebo ' $\mathcal{A}$ je izomorfní s $\mathcal{B}$ via $h$ ') a píšeme $\mathcal{A} \simeq \mathcal{B}\left(\right.$ nebo $\left.\mathcal{A} \simeq_h \mathcal{B}\right)$. Automorfismus $\mathcal{A}$ je izomorfismus $\mathcal{A}$ na $\mathcal{A}$
+Všimněte si, že relace 'býti izomorfní' je ekvivalence. Ukažme si jeden příklad:
+Př́klad 9.2.2. Je-li $|X|=n$, je potenční algebra $\underline{\mathcal{P}(X)}=\langle\mathcal{P}(X),-, \cap, \cup, \emptyset, X\rangle$ izomorfní s Booleovou algebrou $\underline{2}^n=\left\langle\{0,1\}^n,-{ }_n, \wedge_n, \vee_n,(0, \ldots, 0),(1, \ldots, 1)\right\rangle$ (kde operace aplikujeme po složkách) via $h(A)=\chi_A$, kde $\chi_A$ je charakteristický vektor podmnožiny $A \subseteq X$.
+9.3 w-kategorické teorie
+Nyní se podíváme na teorie, které mají jediný spočetně nekonečný model (až na izomorfismus), říkáme jim $\omega$-kategorické. ${ }^6$
+
+Definice 9.3.1 (Izomorfní spektrum, $\kappa$-kategoricita). Izomorfní spektrum teorie $T$ je počet $I(\kappa, T)$ modelů $T$ kardinality $\kappa$ až na izomorfismus, pro každou kardinalitu $\kappa$ (včetně transfinitních). Teorie $T$ je $\kappa$-kategorická, pokud $I(\kappa, T)=1$.
+
+Nadále nás bude zajímat jen případ $\kappa=\omega$, totiž teorie $\mathrm{s}$ jediným spočetně nekonečným modelem (až na izomorfismus). Jako příklad uved'me teorii hustého lineárního uspořádání bez konců:
+Tvrzení 9.3.2. Teorie DeLO je $\omega$-kategorická.
+Důkaz. Vezměme dva spočetně nekonečné modely $\mathcal{A}, \mathcal{B}$ a očíslujme jejich prvky: $A=\left\{a_i \mid\right.$ $i \in \mathbb{N}\}, B=\left\{b_i \mid i \in \mathbb{N}\right\}$. Indukcí podle $n$ lze díky hustotě nalézt posloupnost $h_0 \subseteq h_1 \subseteq$ $h_2 \subseteq \cdots$ prostých (parciálních) funkcí z $A$ do $B$, takových, že $\left\{a_0, \ldots, a_{n-1}\right\} \subseteq \operatorname{dom} h_n$, $\left\{b_0, \ldots, b_{n-1}\right\} \subseteq \operatorname{rng} h_n,{ }^7$ a zachovávají uspoř́ádáni ${ }^8$ Potom $\mathcal{A} \simeq \mathcal{B}$ via $h=\bigcup_{n \in \mathbb{N}} h_n$.
+Důsledek 9.3.3. Izomorfní spektrum teorie DeLO* je následující:
+$$
+I\left(\kappa, \text { DeLO }^*\right)= \begin{cases}0 & \text { pro } \kappa \in \mathbb{N}, \\ 4 & \text { pro } \kappa=\omega .\end{cases}
+$$
+Spočetné modely až na izomorfismus jsou napřiklad:
+$$
+\mathbb{Q}=\langle\mathbb{Q}, \leq\rangle \simeq \mathbb{Q}\lceil(0,1), \mathbb{Q}\lceil(0,1], \mathbb{Q}\lceil[0,1), \mathbb{Q}\lceil[0,1]
+$$
+Důkaz. Husté uspořádání jistě nemůže být konečné. Izomorfismus musí zobrazit nejmenší prvek na nejmenší prvek, a největší na největší.
+
+Pojem $\omega$-kategoricity lze chápat jako zeslabení pojmu kompletnosti. Platí následující užitečné kritérium: jazyce L. Je-li
+- L bez rovnosti, nebo
+- L s rovností a $T$ nemá konečné modely, potom je teorie $T$ kompletni.
+
+### (P23) Axiomatizovatelnost, konečná axiomatizovatelnost, otevřená axiomatizovatelnost.
+9.4 Axiomatizovatelnost
+Na závěr této kapitoly se podíváme, za jakých okolností lze 'popsat' (axiomatizovat) třídu modelů respektive teorii. Zajímat nás bude také kdy si vystačíme s konečně mnoha axiomy, a kdy to lze pomocí otevřených axiomů (kterých může být i nekonečně mnoho). Srovnejte s Tvrzením 2.3.4 z výrokové logiky.
+
+Definice 9.4.1 (Axiomatizovatelnost). Mějme třídu struktur $K \subseteq \mathrm{M}_L$ v nějakém jazyce $L$. Ř́káme, že $K$ je
+- axiomatizovatelná, pokud existuje $L$-teorie $T$ taková, že $\mathrm{M}_L(T)=K$,
+- konečně axiomatizovatelná, pokud je axiomatizovatelná konečnou teorií, a
+- otevřeně axiomatizovatelná, pokud je axiomatizovatelná otevřenou teorií.
+O L-teorii $T^{\prime}$ říkáme, že je konečně resp. otevřeně axiomatizovatelná, pokud to platí o třídě modelů $K=\mathrm{M}_L\left(T^{\prime}\right)$.
+Přiklad 9.4.2. Uved'me několik příkladů:
+- grafy nebo částečná uspořádání jsou konečně i otevřeně axiomatizovatelné,
+- tělesa jsou konečně, ale ne otevřeně axiomatizovatelná,
+- nekonečné grupy jsou axiomatizovatelné, ale ne konečně,
+- konečné grafy nejsou axiomatizovatelné.
+Proč tomu tak je ukážeme níže.
+Začněme jednoduchým faktem:
+Pozorování 9.4.3. Je-li $K$ axiomatizovatelná, musí být uzavřená na elementární ekvivalenci.
+Z věty o kompaktnosti snadno získáme následující tvrzení, pomocí kterého lze ukázat neaxiomatizovatelnost např. konečných grafů, konečných grup, konečných těles.
+
+Věta 9.4.4. Pokud má teorie libovolně velké konečné modely, potom má i nekonečný model. $V$ tom případě není třída všech jejích konečných modeluْ axiomatizovatelná.
+9.4.1 Konečná axiomatizovatelnost
+Ukážeme následující kritérium konečné axiomatizovatelnosti: jak třída struktur $K$ tak i $\bar{K}$ musí být axiomatizovatelné.
+
+Věta 9.4.6 (O konečné axiomatizovatelnosti). Mějme třídu struktur $K \subseteq \mathrm{M}_L$ a uvažme také její doplněk $\bar{K}=\mathrm{M}_L \backslash K$. Potom $K$ je konečně axiomatizovatelná, právě když $K i \bar{K}$ jsou axiomatizovatelné.
+9.4.2 Otevřená axiomatizovatelnost
+Pro otevřenou axiomatizovatelnost existuje jednoduché sémantické kritérium: třída jejích modelů musí být uzavřená na podstruktury. Platí dokonce ekvivalence, dokážeme ale jen jednu implikaci (důkaz druhé je obtížnější).
+
+Věta 9.4.9. Pokud je teorie T otevřeně axiomatizovatelná, potom je každá podstruktura modelu $T$ také modelem $T$.
+
+Poznámka 9.4.10. Platí i obrácená implikace: Je-li každá podstruktura modelu $T$ také modelem, potom je $T$ otevřeně axiomatizovatelná. Důkaz zde ale neuvedeme.
+
+Důkaz. Necht' $T^{\prime}$ je otevřená axiomatizace $T$. Mějme model $\mathcal{A} \models T^{\prime}$ a podstrukturu $\mathcal{B} \subseteq \mathcal{A}$. Pro každou formuli $\varphi \in T^{\prime}$ platí $\mathcal{B} \models \varphi$ (nebot $\varphi$ je otevřená), tedy i $\mathcal{B} \models T^{\prime}$.
+
+### (P24) Rekurzivní axiomatizace, rekurzivní axiomatizovatelnost, rekurzivně spočetná kompletace.
+10.1 Rekurzivní axiomatizace a rozhodnutelnost
+$\mathrm{V}$ důkazových systémech, kterými jsme se zabývali (tablo metoda, rezoluce, hilbertův kalkulus) jsme povolili, aby teorie $T$, ve které dokazujeme, byla nekonečná. Vůbec jsem se ale zatím nezabývali tím, jak je zadaná. Pokud chceme ověřit, že je daný objekt (tablo, rezoluční strom, posloupnost formulí) korektním důkazem, potřebujeme nějaký algoritmický př́stup ke všem axiomům $T$.
+
+Jednou z možností by bylo požadovat enumerátor $T$, tj. algoritmus, který vypisuje na výstup axiomy z $T$, a každý axiom někdy vypíše. ${ }^2$ Potom by bylo snadné potvrdit, že je daný důkaz korektní. Pokud bychom ale dostali důkaz, který použil chybný axiom, který v $T$ není, nikdy bychom se to nedozvěděli: nekonečně dlouho bychom čekali, zda jej enumerátor přeci jen nevypíše. Požadujeme proto silnější vlastnost, která umožňuje rozpoznat i chybné důkazy rekurzivní axiomatizaci $:^3$
+
+Definice 10.1.1 (Rekurzivní axiomatizace). Teorie $T$ je rekurzivně axiomatizovaná, pokud existuje algoritmus, který pro každou vstupní formuli $\varphi$ doběhne a odpoví, zda $\varphi \in T$.
+
+Poznámka 10.1.2. Ve skutečnosti by nám stačil enumerátor pro $T$, pokud by bylo garantováno, že vypisuje axiomy v lexikografickém uspořádání. To už je ekvivalentní rekurzivní axiomatizaci. (Rozmyslete si proč.)
+${ }^1$ Viz přednáška NTIN090 Základy složitosti a vyčíslitelnosti.
+${ }^2$ Nutným předpokladem je, aby $T$ byla spočetná. K tomu stačí předpokládat, že jazyk je spočetný.
+${ }^3$ Slovo rekurzivní zde neznamená běžně známou rekurzi, ale odkazuje na formalizaci algoritmu pomocí 'rekurzivních funkcí' od Gödela. Rekurzivní funkce zde znamená totéž, co vyčíslitelná nějakým Turingovým strojem, a teorii vyčíslitelnosti (computability theory) se někdy také říká recursion theory.
+10.1.2 Rekurzivní axiomatizovatelnost
+$\mathrm{V}$ předchozí kapitole, konkrétně v Sekci 9.4 , jsme se zabývali otázkou, kdy lze popsat nějakou třídu struktur [resp. teorii] pomocí axiomů [určitého tvaru]. Nyní se zaměřme na otázku, kdy to lze udělat algoritmicky.
+
+Definice 10.1.8 (Rekurzivní axiomatizovatelnost). Třída $L$-struktur $K \subseteq \mathrm{M}_L$ je rekurzivně axiomatizovatelná, pokud existuje rekurzivně axiomatizovaná $L$-teorie $T$ taková, že $K=M_L(T)$. Teorie $T^{\prime}$ je rekurzivně axiomatizovatelná, pokud je rekurzivně axiomatizovatelná třída jejích modelů, neboli pokud je $T^{\prime}$ ekvivalentní nějaké rekurzivně axiomatizované teorii.
+
+Poznámka 10.1.9. Podobně bychom mohli definovat rekurzivně spočetnou axiomatizovatelnost.
+Ukažme si následující jednoduché tvrzení:
+Tvrzení 10.1.10. Je-li $\mathcal{A}$ konečná struktura v konečném jazyce s rovností, potom je teorie $\operatorname{Th}(\mathcal{A})$ rekurzivně axiomatizovatelná.
+10.1.1 Rekurzivně spočetná kompletace
+Požadavek kompletnosti je příliš silný, ukážeme, že stačí pokud jsme schopni efektivně popsat všechny kompletní jednoduché extenze. ${ }^5$
+
+Definice 10.1.5 (Rekurzivně spočetná kompletace). Řekneme, že teorie $T$ má rekurzivně spočetnou kompletaci, pokud (nějaká) množina až na ekvivalenci všech jednoduchých kompletních extenzí teorie $T$ je rekurzivně spočetná, tj. existuje algoritmus, který pro danou vstupní dvojici přirozených čísel $(i, j)$ vypíše na výstup $i$-tý axiom $j$-té extenze (v nějakém pevně daném uspořádání ${ }^6$ ), nebo odpoví, že takový axiom už neexistuje. ${ }^7$
+
+Tvrzení 10.1.6. Pokud je teorie $T$ rekurzivně axiomatizovaná a má rekurzivně spočetnou kompletaci, potom je $T$ rozhodnutelná.
+${ }^4$ Zde nám stačí enumerátor axiomů $T$, nebo postupně generujeme všechny sentence (např. v lexikografickém pořadí) a pro každou testujeme, zda je axiomem.
+${ }^5 \mathrm{~T} j$. 'všechny modely až na elementární ekvivalenci'.
+${ }^6$ Zde potřebujeme, aby byl jazyk spočetný.
+${ }^7$ Jeli extenzí méně než $j$, nebo má-li $j$-tá extenze méně než $i$ axiomů.
+
+### (P25) Rozhodnutelná a částečnĕ rozhodnutelná teorie.
+Zaměříme se na otázku, zda můžeme v dané teorii $T$ 'algoritmicky rozhodovat pravdu' (tj. platnost vstupní formule). Pokud ano, říkáme, že je teorie rozhodnutelná. To je ale poměrně silná vlastnost, definujeme proto také částečnou rozhodnutelnost, která znamená, že pokud formule platí, algoritmus nám to řekne, ale pokud neplatí, nikdy se nemusíme dočkat odpovědi.
+Definice 10.1.3 (Rozhodnutelnost). O teorii $T$ říkáme, že je
+- rozhodnutelná, pokud existuje algoritmus, který pro každou vstupní formuli $\varphi$ doběhne a odpoví, zda $T \models \varphi$,
+- částečně rozhodnutelná, pokud existuje algoritmus, který pro každou vstupní formuli:
+- pokud $T \models \varphi$, doběhne a odpoví "ano",
+- pokud $T \not \models \varphi$, bud' nedoběhne, nebo doběhne a odpoví "ne".
+Můžeme jako obvykle předpokládat, že $\varphi$ v definici je sentence. Ukážeme si jednoduché tvrzení:
+Tvrzení 10.1.4. Necht $T$ je rekurzivně axiomatizovaná. Potom:
+(i) T je částečně rozhodnutelná,
+(ii) je-li T navíc kompletní, potom je rozhodnutelná.
+
+
+## Seznam lehkých otázek
+### (L1) Množinu modelů nad konečným jazykem lze axiomatizovat výrokem v CNF, výrokem v DNF.
+### (L2) Algebra výroků bezesporné teorie nad konečným jazykem je izomorfní potenční algebře.
+### (L3) 2-SAT, Algoritmus implikačního grafu, jeho korektnost.
+### (L4) Horn-SAT, Algoritmus jednotkové propagace, jeho korektnost.
+### (L5) Algoritmus DPLL pro řešení SAT.
+### (L6) Věta o konstantách.
+### (L7) Vlastnosti extenze o definice.
+### (L8) Vztah definovatelných množin a automorfismů.
+### (L9) Tablo metoda v jazyce s rovností.
+### (L10) Věta o kompaktnosti a její aplikace.
+### (L11) Věta o korektnosti rezoluce ve výrokové logice.
+### (L12) Věta o korektnosti rezoluce v predikátové logice.
+### (L13) Souvislost stromu dosazení a splnitelnosti CNF formule.
+### (L14) Unifikační algoritmus (korektnost stačí vyslovit).
+### (L15) Nestandardní model pr̆irozených čísel.
+### (L16) Kompletní jednoduché extenze DeLO*.
+### (L17) Existence spočetného algebraicky uzavřeného tělesa.
+### (L18) Tělesa charakteristiky 0 nejsou konečně axiomatizovatelná.
+### (L19) Kritérium otevřené axiomatizovatelnosti.
+### (L20) Rekurzivně axiomatizovaná teorie je částečně rozhodnutelná, kompletní je rozhodnutelná.
+### (L21) Teorie konečné struktury v konečném jazyce s rovností je rozhodnutelná.
+### (L22) Gödelovy věty o neúplnosti a jejich důsledky (bez důkazı̊).
+
+## Seznam těžkých otázek
+### (T1) Věta o korektnosti tablo metody ve výrokové logice.
+### (T2) Věta o korektnosti tablo metody v predikátové logice.
+### (T3) Věta o úplnosti tablo metody ve výrokové logice.
+### (T4) Věta o úplnosti tablo metody v predikátové logice.
+### (T5) Věta o konečnosti sporu, důsledky o konečnosti a systematičnosti dükazů.
+### (T6) Věta o úplnosti rezoluce ve výrokové logice.
+### (T7) Vĕta o úplnosti LI-rezoluce pro výrokové Hornovy formule.
+### (T8) Věta o úplnosti rezoluce v predikátové logice (Lifting lemma stačí vyslovit)
+### (T9) Skolemova věta.
+### (T10) Herbrandova vĕta.
+### (T11) Löwenheim-Skolemova vĕta včetnĕ varianty s rovností, jejich důsledky.
+### (T12) Vztah izomorfismu a elementární ekvivalence.
+### (T13) w-kategorické kritérium kompletnosti.
+### (T14) Neaxiomatizovatelnost konečných modelů.
+### (T15) Věta o konečné axiomatizovatelnosti.
+### (T16) Rekurzivně axiomatizovaná teorie s rekurzivnĕ spočetnou kompletací je rozhodnutelná.
+### (T17) Nerozhodnutelnost predikátové logiky.

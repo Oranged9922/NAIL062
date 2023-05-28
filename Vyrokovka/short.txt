@@ -1,0 +1,191 @@
+- (P1) Co je to model ve výrokové logice a jak funguje pravdivostní funkce výroku?
+- Model ve výrokové logice je interpretace, která přiřazuje pravdivostní hodnoty jednotlivým výrokům. Pravdivostní funkce výroku hodnotí, zda je daný výrok pravdivý nebo nepravdivý v daném modelu.
+
+- (P2) Jaké jsou základní sémantické pojmy (pravdivost, lživost, nezávislost, splnitelnost) v logice vzhledem k teorii?
+- Pravdivost a lživost jsou hodnoty, které se přiřazují výrokům v logice. Nezávislost výroku znamená, že pravdivost jednoho výroku nijak neovlivňuje pravdivost druhého. Splnitelnost je vlastnost takových výroků nebo systému výroků, pro které existuje model, v němž jsou všechny výroky pravdivé.
+
+- (P3) Co znamená ekvivalence výroků resp. výrokových teorií a co je T-ekvivalence?
+- Ekvivalence výroků znamená, že dva výroky jsou pravdivé nebo nepravdivé za stejných okolností. T-ekvivalence výrokových teorií znamená, že dvě teorie jsou ekvivalentní, pokud mají stejné modely.
+
+- (P4) Jaké jsou sémantické pojmy o teorii (sporná, bezesporná, kompletní, splnitelná)?
+- Sporná teorie obsahuje výroky, které se vzájemně vylučují. Bezesporná teorie je taková, která není sporná. Kompletní teorie je teorie, ve které pro každý výrok platí, že je buď pravdivý, nebo je pravdivý jeho negace. Splnitelná teorie je taková, pro kterou existuje alespoň jeden model, v němž jsou všechny výroky pravdivé.
+
+- (P5) Co je to extenze teorie (jednoduchá, konzervativní) a jaké jsou odpovídající sémantická kritéria?
+- Extenze teorie je rozšíření původní teorie o nové výroky. Jednoduchá extenze přidává výroky, které nejsou v původní teorii zahrnuty. Konzervativní extenze přidává výroky, které nezpochybňují pravdivost výroků v původní teorii.
+
+- (P6) Co je to tablo z teorie a jak funguje tablo důkaz?
+- Tablo je grafická metoda pro testování logických argumentů a dokazování tezí ve výrokové a predikátové logice. Tablo důkaz je metoda pro ověřování pravdivosti výroků pomocí stromové struktury, kde výroky jsou rozděleny na menší části až do základních atomických výroků.
+
+- (P7) Co je to kanonický model?
+- Kanonický model je specifický model dané teorie, který se vyznačuje jednoduchostí a přehledností a slouží jako vzorový příklad pro danou teorii.
+
+- (P8) Co znamenají pojmy kongruence struktury, faktorstruktura a axiomy rovnosti?
+- Kongruence struktury je relace, která je kompatibilní s operacemi struktury. Faktorstruktura je struktura získaná vytvořením ekvivalenčních tříd na základě kongruence. Axiomy rovnosti jsou základní pravidla, která definují vlastnosti rovnosti.
+
+- (P9) Co znamenají pojmy CNF a DNF, Hornův tvar a jak se dá popsat množinová reprezentace CNF formule a splňující ohodnocení?
+- CNF (Conjunctive Normal Form) a DNF (Disjunctive Normal Form) jsou standardizované formy zápisu logických formulí. Hornův tvar je specifická forma CNF. Množinová reprezentace CNF formule je zápis formule jako množiny klauzulí. Splňující ohodnocení je takové ohodnocení proměnných, při kterém je celá formule pravdivá.
+
+- (P10) Co je to rezoluční pravidlo, unifikace a nejobecnější unifikace?
+- Rezoluční pravidlo je metoda, která se používá pro důkaz výroků v logice, konkrétně v predikátové logice. Unifikace je proces hledání takového ohodnocení proměnných, které dělá dva výroky ekvivalentními. Nejobecnější unifikace je taková unifikace, která má nejméně omezení na hodnoty proměnných.
+
+- (P11) Co je rezoluční důkaz a zamítnutí a co je rezoluční strom?
+- Rezoluční důkaz je technika používaná v predikátové logice k dokazování nebo zamítnutí výroků pomocí rezolučního pravidla. Rezoluční strom je grafická reprezentace tohoto procesu, kde uzly stromu představují jednotlivé kroky důkazu.
+
+- (P12) Co je lineární rezoluce, lineární důkaz, LI-rezoluce a LI-důkaz?
+- Lineární rezoluce a lineární důkaz jsou techniky, při kterých se postupuje sekvenčně, krok za krokem, bez možnosti větvení. LI-rezoluce a LI-důkaz jsou specifické druhy lineární rezoluce a důkazu, které se vyznačují specifickými omezeními na formu výroků.
+
+- (P13) Co je signatura a jazyk predikátové logiky a co je struktura daného jazyka?
+- Signatura je sada symbolů používaných v jazyce predikátové logiky. Jazyk predikátové logiky je sada výroků vytvořených pomocí těchto symbolů. Struktura daného jazyka je konkrétní interpretace tohoto jazyka.
+
+- (P14) Jaký je význam pojmů atomická formule, formule, sentence a otevřené formule?
+- Atomická formule je nejjednodušší typ formule, která neobsahuje žádné další formule. Formule je jakýkoli výrok vytvořený pomocí symbolů daného jazyka. Sentence je formule, která neobsahuje žádné volné proměnné. Otevřená formule je formule, která obsahuje alespoň jednu volnou proměnnou.
+
+- (P15) Co je instance formule, substituovatelnost a varianta formule?
+- Instance formule je formule získaná nahrazením některých nebo všech volných proměnných dané formule konkrétními termíny. Substituovatelnost označuje schopnost nahradit proměnné v formuli jinými termíny. Varianta formule je formule, která je syntakticky odlišná, ale sémanticky ekvivalentní.
+
+- (P16) Jak se určuje pravdivostní hodnota formule ve struktuře při ohodnocení a co je platnost formule ve struktuře?
+- Pravdivostní hodnota formule ve struktuře při ohodnocení je určena pomocí pravidel daného logického systému a specifické interpretace proměnných ve struktuře. Platnost formule ve struktuře znamená, že formule je pravdivá pro všechna ohodnocení proměnných ve struktuře.
+
+- (P17) Co je kompletní teorie v predikátové logice a co je elementární ekvivalence?
+- Kompletní teorie v predikátové logice je teorie, ve které je každý výrok nebo jeho negace doložen. Elementární ekvivalence dvou struktur znamená, že každá formule, která je pravdivá v jedné struktuře, je pravdivá i v druhé struktuře.
+
+- (P18) Co je podstruktura, generovaná podstruktura, expanze a redukt struktury?
+- Podstruktura je část struktury, která sama tvoří strukturu. Generovaná podstruktura je nejmenší podstruktura, která obsahuje určitou množinu prvků. Expanze struktury je struktura, která rozšiřuje původní strukturu o nové elementy nebo operace. Redukt struktury je struktura, která je získána odstraněním některých elementů nebo operací z původní struktury.
+
+- (P19) Co je definovatelnost ve struktuře?
+- Definovatelnost ve struktůře se týká schopnosti vyjádřit určité vlastnosti nebo relace mezi prvky struktury pomocí formule daného jazyka.
+
+- (P20) Co je extenze o definice?
+- Extenze o definice je rozšíření struktury nebo teorie o nové formule, které jsou definovány pomocí existujících symbolů a pravidel.
+
+- (P21) Co je prenexní normální forma a Skolemova varianta?
+- Prenexní normální forma je formule predikátové logiky, ve které jsou všechny kvantifikátory umístěny na začátku formule. Skolemova varianta je transformace formule do tvaru, kde je každý existenční kvantifikátor nahrazen Skolemovo funkcí.
+
+- (P22) Co je izomorfismus struktur, izomorfní spektrum a $\omega$-kategorická teorie?
+- Izomorfismus struktur je bijekce mezi strukturami, která zachovává všechny operace a relace. Izomorfní spektrum je množina velikostí struktur, které jsou izomorfní dané struktuře. $\omega$-kategorická teorie je teorie, ve které jsou všechny bezkonečné modely dané velikosti izomorfní.
+
+- (P23) Co je axiomatizovatelnost, konečná axiomatizovatelnost a otevřená axiomatizovatelnost?
+- Axiomatizovatelnost je schopnost vyjádřit všechny pravdivé výroky teorie pomocí konečné nebo spočetné množiny axiomů. Konečná axiomatizovatelnost znamená, že existuje konečná množina axiomů, která generuje všechny pravdivé výroky teorie. Otevřená axiomatizovatelnost se týká schopnosti vyjádřit všechny pravdivé výroky otevřené formule teorie pomocí množiny axiomů.
+
+- (P24) Co je rekurzivní axiomatizace, rekurzivní axiomatizovatelnost a rekurzivně spočetná kompletace?
+- Rekurzivní axiomatizace je proces definování množiny axiomů pomocí rekurzivního pravidla. Rekurzivní axiomatizovatelnost je schopnost vyjádřit všechny pravdivé výroky teorie pomocí rekurzivně definované množiny axiomů. Rekurzivně spočetná kompletace je proces doplnění rekurzivně definované množiny axiomů o další axiomy tak, aby byla kompletní.
+
+- (P25) Co je rozhodnutelná a částečně rozhodnutelná teorie?
+- Rozhodnutelná teorie je teorie, pro kterou existuje algoritmus, který dokáže rozhodnout pravdivost libovolného výroku teorie. Částečně rozhodnutelná teorie je teorie, pro kterou existuje algoritmus, který dokáže rozhodnout pravdivost libovolného výroku.
+
+- (L1) Je možné axiomatizovat množinu modelů nad konečným jazykem pomocí výroku v CNF nebo DNF formě?
+- Ano, množinu modelů nad konečným jazykem lze axiomatizovat pomocí výroku v konjunktivní normální formě (CNF) nebo disjunktivní normální formě (DNF).
+
+- (L2) Je algebra výroků bezesporné teorie nad konečným jazykem izomorfní s potenční algebrou?
+- Ano, algebra výroků bezesporné teorie nad konečným jazykem je izomorfní s potenční algebrou, což znamená, že existuje bijektivní mapování mezi těmito dvěma strukturami, které zachovává všechny algebristické operace.
+
+- (L3) Co je 2-SAT, Algoritmus implikačního grafu a jaká je jeho korektnost?
+- 2-SAT je speciální případ problému SAT, kde je každá klauzule omezena na nejvýše dva literály. Algoritmus implikačního grafu je technika pro řešení 2-SAT problémů, která konstruuje graf reprezentující implikace mezi literály. Korektnost tohoto algoritmu znamená, že vždy produkuje správné řešení, pokud řešení existuje.
+
+- (L4) Co je Horn-SAT, Algoritmus jednotkové propagace a jaká je jeho korektnost?
+- Horn-SAT je speciální případ problému SAT, kde je každá klauzule Hornova klauzule (tj. má nejvýše jeden pozitivní literál). Algoritmus jednotkové propagace je technika pro řešení Horn-SAT problémů, která postupně eliminuje literály, které musí být pravdivé. Korektnost tohoto algoritmu znamená, že vždy produkuje správné řešení, pokud řešení existuje.
+
+- (L5) Co je Algoritmus DPLL pro řešení SAT?
+- Algoritmus DPLL (Davis-Putnam-Logemann-Loveland) je průlomový algoritmus pro řešení problému SAT, který postupně rozkládá problém na menší a menší podproblémy, dokud není dosaženo řešení.
+
+- (L6) Co je Věta o konstantách?
+- Věta o konstantách je důležitým výsledkem v logice, který říká, že pro každou strukturu existuje ekvivalentní struktura, ve které jsou všechny konstanty interpretovány jako různé prvky.
+
+- (L7) Jaké jsou vlastnosti extenze o definice?
+- Extenze o definice může zahrnovat přidání nových symbolů nebo pravidel do původního jazyka, které jsou definovány pomocí původních symbolů a pravidel. Vlastnosti extenze o definice závisí na konkrétních definicích, které jsou přidány.
+
+- (L8) Jaký je vztah mezi definovatelnými množinami a automorfismy?
+- Automorfismus struktury je bijekce, která mapuje strukturu na sebe samu tak, že zachovává všechny strukturní vlastnosti. Definovatelná množina v dané struktuře je invariantní vůči všem automorfismům této struktury.
+
+- (L9) Co je Tablo metoda v jazyce s rovností?
+- Tablo metoda je technika pro řešení logických problémů, která konstruuje stromovou strukturu zvanou tablo. V jazyce s rovností se tablo metoda rozšiřuje o pravidla pro zacházení s rovností.
+
+- (L10) Co je Věta o kompaktnosti a jaké jsou její aplikace?
+- Věta o kompaktnosti říká, že pokud je každá konečná podmnožina množiny výroků splnitelná, pak je celá množina splnitelná. Tato věta má mnoho aplikací, například v důkazech o konzistenci a úplnosti některých formálních systémů, v modelové teorii, a v důkazech o existenci modelů pro různé teorie.
+
+- (L11) Co je Věta o korektnosti rezoluce ve výrokové logice?
+- Věta o korektnosti rezoluce ve výrokové logice říká, že pokud je možné pomocí rezolučního pravidla odvodit prázdnou klauzuli z množiny klauzulí, pak je tato množina nesplnitelná. To znamená, že rezoluční pravidlo je korektní metoda pro ověřování nesplnitelnosti množiny klauzulí.
+
+- (L12) Co je Věta o korektnosti rezoluce v predikátové logice?
+- Věta o korektnosti rezoluce v predikátové logice je analogická k větě o korektnosti rezoluce ve výrokové logice, s tím rozdílem, že se aplikuje na klauzule predikátové logiky. Říká, že pokud je možné pomocí rezolučního pravidla odvodit prázdnou klauzuli z množiny klauzulí, pak je tato množina nesplnitelná.
+
+- (L13) Jaký je vztah mezi stromem dosazení a splnitelností CNF formule?
+- Strom dosazení je struktura, která reprezentuje všechna možná dosazení proměnných v CNF formuli. Pokud existuje cesta ve stromu dosazení, která vede k pravdivé hodnotě CNF formule, pak je tato CNF formule splnitelná.
+
+- (L14) Co je unifikační algoritmus a jaká je jeho korektnost?
+- Unifikační algoritmus je metoda pro nalezení unifikátoru pro dvě nebo více formule v predikátové logice. Korektnost unifikačního algoritmu znamená, že pokud algoritmus vrátí unifikátor, pak tato hodnota skutečně unifikuje dané formule.
+
+- (L15) Co je nestandardní model přirozených čísel?
+- Nestandardní model přirozených čísel je model teorie čísel, který obsahuje "přirozená čísla" mimo obvyklou množinu přirozených čísel 0, 1, 2, ... . Tyto dodatečné prvky se někdy nazývají "hyperpřirozená čísla".
+
+- (L16) Co je kompletní jednoduchá extenze DeLO*?
+- Kompletní jednoduchá extenze DeLO* je rozšíření logiky prvního řádu (DeLO), které přidává některé operátory nebo axiomy, které umožňují expresivnější vyjádření. Tyto rozšíření jsou "kompletní" v tom smyslu, že pro jakýkoliv výrok v dané jazyku lze rozhodnout, zda je pravdivý nebo nepravdivý.
+
+- (L17) Existuje spočetné algebraicky uzavřené těleso?
+- Ano, existuje spočetné algebraicky uzavřené těleso. Toto je důsledek Steinitzovy věty, která říká, že pro každou spočetnou množinu existuje algebraicky uzavřené těleso, které ji obsahuje.
+
+- (L18) Jsou tělesa charakteristiky 0 konečně axiomatizovatelná?
+- Ne, tělesa charakteristiky 0 nejsou konečně axiomatizovatelná. To znamená, že neexistuje konečná množina axiomů, která by charakterizovala všechna tělesa charakteristiky 0.
+
+- (L19) Jaké je kritérium otevřené axiomatizovatelnosti?
+- Kritérium otevřené axiomatizovatelnosti říká, že třída struktur je otevřeně axiomatizovatelná právě tehdy, když je definovatelná v nějakém jazyce predikátové logiky s rovností pomocí nějaké teorie, která je uzavřená pod izomorfismy, substrukturními vloženími a spočetnými řetězovými sumami.
+
+- (L20) Je pravda, že rekurzivně axiomatizovaná teorie je částečně rozhodnutelná, a pokud je kompletní, je rozhodnutelná?
+- Ano, to je pravda. Pokud teorie má rekurzivní axiomatizaci, pak existuje algoritmus, který rozhodne, zda daný výrok je axiom této teorie, což znamená, že tato teorie je částečně rozhodnutelná. Pokud je teorie navíc kompletní, pak pro každý výrok lze rozhodnout, zda je pravdivý nebo nepravdivý, což znamená, že tato teorie je rozhodnutelná.
+
+- (L21) Je pravda, že teorie konečné struktury v konečném jazyce s rovností je rozhodnutelná?
+- Ano, je to pravda. Teorie konečné struktury v konečném jazyce s rovností je rozhodnutelná, protože pro takovou teorii existuje algoritmus, který může rozhodnout o pravdivosti libovolného výroku v tomto jazyce.
+
+- (L22) Co jsou Gödelovy věty o neúplnosti a jaké jsou jejich důsledky?
+- Gödelovy věty o neúplnosti jsou dvě významné věty v matematické logice. První věta říká, že v každém dostatečně silném formálním systému, který je schopný formulovat základy aritmetiky, existují věty, které nelze ani dokázat, ani vyvrátit. Druhá věta říká, že takový systém nemůže dokázat svoji vlastní konzistenci. Důsledky těchto vět jsou značné a zasahují do mnoha oblastí matematiky a filosofie.
+
+- (T1) Co je Věta o korektnosti tablo metody ve výrokové logice?
+- Věta o korektnosti tablo metody ve výrokové logice říká, že pokud tablo metoda pro daný výrok vede k uzavřenému tablu, pak je tento výrok pravdivý. Jinými slovy, tablo metoda je korektní nástroj pro ověřování pravdivosti výroků ve výrokové logice.
+
+- (T2) Co je Věta o korektnosti tablo metody v predikátové logice?
+- Věta o korektnosti tablo metody v predikátové logice je analogická k větě o korektnosti tablo metody ve výrokové logice. Říká, že pokud tablo metoda pro daný výrok v predikátové logice vede k uzavřenému tablu, pak je tento výrok pravdivý.
+
+- (T3) Co je Věta o úplnosti tablo metody ve výrokové logice?
+- Věta o úplnosti tablo metody ve výrokové logice říká, že pokud je daný výrok ve výrokové logice pravdivý, pak existuje uzavřené tablo pro tento výrok. Jinými slovy, tablo metoda je úplný nástroj pro ověřování pravdivosti výroků ve výrokové logice.
+
+- (T4) Co je Věta o úplnosti tablo metody v predikátové logice?
+- Věta o úplnosti tablo metody v predikátové logice je analogická k větě o úplnosti tablo metody ve výrokové logice. Říká, že pokud je daný výrok v predikátové logice pravdivý, pak existuje uzavřené tablo pro tento výrok.
+
+- (T5) Co je Věta o konečnosti sporu a jaké jsou její důsledky o konečnosti a systematičnosti důkazů?
+- Věta o konečnosti sporu říká, že pokud existuje spor v nějaké teorii, pak existuje konečný důkaz tohoto sporu. Důsledky této věty jsou, že důkazy mohou být vždy omezeny na konečný počet kroků a že existuje systematický postup pro hledání těchto důkazů.
+
+- (T6) Co je Věta o úplnosti rezoluce ve výrokové logice?
+- Věta o úplnosti rezoluce ve výrokové logice říká, že pokud je daný výrok ve výrokové logice splnitelný, pak existuje úspěšný rezoluční důkaz tohoto výroku. To znamená, že rezoluční metoda je úplný nástroj pro ověřování splnitelnosti výroků ve výrokové logice.
+
+- (T7) Co je Věta o úplnosti LI-rezoluce pro výrokové Hornovy formule?
+- Věta o úplnosti LI-rezoluce pro výrokové Hornovy formule říká, že pokud je Hornova formule splnitelná, pak existuje úspěšný LI-rezoluční důkaz tohoto výroku.
+
+- (T8) Co je Věta o úplnosti rezoluce v predikátové logice?
+- Věta o úplnosti rezoluce v predikátové logice říká, že pokud je daný výrok v predikátové logice splnitelný, pak existuje úspěšný rezoluční důkaz tohoto výroku. Tato věta je podložena Lifting Lemma, což je klíčový princip používaný v rezolučních důkazech v predikátové logice.
+
+- (T9) Co je Skolemova věta?
+- Skolemova věta je základní věta logiky a teorie modelů, která tvrdí, že každá formule v prenexním tvaru v predikátové logice prvního řádu, která je splnitelná, má také skolemizovanou formu, která je splnitelná.
+
+- (T10) Co je Herbrandova věta?
+- Herbrandova věta je důležitá věta v logice a teorii výpočetů, která říká, že pokud existuje důkaz formule univerzálního kvantifikátoru, pak existuje "Herbrandův důkaz", který je zcela konstruktivní a obsahuje pouze konečně mnoho instancí této formule.
+
+- (T11) Co je Löwenheim-Skolemova věta a jaké jsou její důsledky?
+- Löwenheim-Skolemova věta je základní věta v teorii modelů, která říká, že pokud teorie v predikátové logice má nekonečný model, pak má model každé nespočetné velikosti. Tato věta má důležité důsledky, například ukazuje, že není možné v predikátové logice axiomatizovat pojem spočetnosti.
+
+- (T12) Jaký je vztah mezi izomorfismem a elementární ekvivalencí?
+- Izomorfismus a elementární ekvivalence jsou dvě klíčové koncepce v teorii modelů. Dva modely jsou izomorfní, pokud existuje bijekce mezi jejich doménami, která zachovává všechny struktury. Dva modely jsou elementárně ekvivalentní, pokud platí stejné věty. Každý izomorfismus implikuje elementární ekvivalenci, ale neplatí to v opačném směru.
+
+- (T13) Co je w-kategorické kritérium kompletnosti?
+- w-kategorické kritérium kompletnosti je kritérium, které říká, že teorie je kompletní, pokud má pouze jeden spočetný model až na izomorfismus.
+
+- (T14) Co znamená neaxiomatizovatelnost konečných modelů?
+- Neaxiomatizovatelnost konečných modelů znamená, že neexistuje žádná sada axiomů v predikátové logice, která by byla schopná charakterizovat všechny a pouze konečné modely daného jazyka.
+
+- (T15) Co je Věta o konečné axiomatizovatelnosti?
+- Věta o konečné axiomatizovatelnosti je důležitá věta v teorii modelů, která říká, že pokud teorie v predikátové logice má konečný model, pak má také model každé konečné velikosti.
+
+- (T16) Co znamená, že rekurzivně axiomatizovaná teorie s rekurzivně spočetnou kompletací je rozhodnutelná?
+- To znamená, že existuje algoritmus, který může rozhodnout o platnosti libovolné věty v této teorii.
+
+- (T17) Co znamená nerozhodnutelnost predikátové logiky?
+- Nerozhodnutelnost predikátové logiky znamená, že neexistuje žádný algoritmus, který by byl schopen rozhodnout o platnosti všech vět v predikátové logice. To bylo prokázáno Gödelovými větami o neúplnosti.
